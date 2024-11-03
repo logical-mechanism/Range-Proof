@@ -35,7 +35,7 @@
 % A separate text-only abstract must be supplied in your final version.
 % This will be used for web pages and indexing and should not contain macros.
 \begin{textabstract}
-  text abstract here
+  text abstract here in final version
 \end{textabstract}
 
 % The content of the paper starts here
@@ -47,7 +47,7 @@ Efficient privacy-preserving range proofs are essential for private information 
 
 \section{Method}
 
-The derivation of zkInterval is simple, practical, and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a product of Weil pairings, and then we will finalize the range proof with two Schnorr proofs. The resulting cryptographic proof is a collection of \(\mathbb{G}_{1}\) points with \( \mathbb{Z}^+ \) scalars.
+The derivation of zkInterval is simple, practical, and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a product of Weil pairings, and then we will finalize the result with two Schnorr proofs. The resulting cryptographic proof is a collection of \(\mathbb{G}_{1}\) points with \( \mathbb{Z}^+ \) scalars.
 
 We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between two publicly known values $a$ and $b$,
 
@@ -173,13 +173,13 @@ The variables are defined as follows:
     \item \( W = C(w, r_{w}) \) corresponds to the commitment associated with the scalar \( w \) and its blinding factor \( r_{w} \).
 \end{itemize}
 
-The proof of the Weil pairing is the hexadecimal string:
+The proof of the Weil pairing is:
 
 \begin{equation}
 \pi = Y | D | \Psi | A | B | W | \Lambda.
 \end{equation}
 
-To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the public known interval endpoints are inside the proof. We need to construct two additional proofs for these endpoint values. 
+To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the publicly known interval endpoints are inside the proof. We need to construct two additional proofs for these endpoint values. 
 
 The commitment for an endpoint in multiplicative form is
 
@@ -214,7 +214,7 @@ g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\al
 the proof holds.
 \end{proof}
 
-The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr proofs, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is:
+The prover must provide \( z \) in hexadecimal form and the element \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr proofs, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is:
 
 \begin{equation}
 \pi = Y | D | \Psi | A | B | W | \Lambda | z_{a} | g^{r_{a}} | z_{b} | g^{r_{b}}.
@@ -223,12 +223,18 @@ The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
-We implemented zkInterval using the BLS12381 curve with Aiken for the Cardano blockchain. The resultant proof size is 2.1K in json format using the ZKInterval type defined in the appendix. This can be compressed further by creating a hexadecimal string with a size of 992 bytes. In string form, the proof can be deconstructed by selecting off the required elements and scalars.
+We implemented zkInterval using the BLS12381 curve with Aiken for the Cardano blockchain. The resultant proof size is 2.1K in json format using the ZKInterval type defined in the appendix. This can be compressed further by creating a single hexadecimal string with a size of 992 bytes. In string form, the proof can be deconstructed by selecting off the required elements and scalars.
 
 Using the json form of the proof in Aiken results in a constant time and memory computation. No matter the interval length, the same amount of time and memory are consumed. Using the built-in Plutus counter in Aiken, the resultant computation time should be around 0.25 seconds with nearly negligible memory requirements. Proof generation time is highly dependent upon the language used during implementation.
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
+
+TODO
+
+\section{Appendix}
 
 TODO
 

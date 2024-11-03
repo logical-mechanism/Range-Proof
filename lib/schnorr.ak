@@ -24,7 +24,7 @@ pub fn fiat_shamir_heuristic(
   g_b: ByteArray,
   // compressed g^r element
   g_r_b: ByteArray,
-  // compressed g^x element
+  // compressed u element
   u_b: ByteArray,
 ) -> ByteArray {
   g_b

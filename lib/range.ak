@@ -45,7 +45,7 @@ pub fn prove(rp: RangeProof) -> Bool {
   )
 }
 
-test simple_range_proof() {
+test a_range_proof() {
   let rp: RangeProof =
     RangeProof {
       yb: #"84ea78e4c3a283c5e8c178f1ff9e384abb11ff93888b4bc8eb4297131dceec0db2c528015303323309137994e4550bbf",
@@ -59,7 +59,7 @@ test simple_range_proof() {
   prove(rp)
 }
 
-test build_simple_range_proof() {
+test build_a_range_proof() {
   let a: Int = 10
   let b: Int = 0
   let d: Int = 7
@@ -68,6 +68,57 @@ test build_simple_range_proof() {
       yb: commitment(a - d, 1) |> g1.compress,
       db: g1.add(commitment(d, 1), commitment(d, 1)) |> g1.compress,
       pb: commitment(0, 3) |> g1.compress,
+      ab: commitment(a, 1) |> g1.compress,
+      bb: commitment(b, 1) |> g1.compress,
+      wb: commitment(d - b, 1) |> g1.compress,
+      lb: commitment(0, 3) |> g1.compress,
+    }
+  prove(rp)
+}
+
+test build_a_null_range_proof() {
+  let a: Int = 0
+  let b: Int = 0
+  let d: Int = 0
+  let rp: RangeProof =
+    RangeProof {
+      yb: commitment(a - d, 1) |> g1.compress,
+      db: g1.add(commitment(d, 1), commitment(d, 1)) |> g1.compress,
+      pb: commitment(0, 3) |> g1.compress,
+      ab: commitment(a, 1) |> g1.compress,
+      bb: commitment(b, 1) |> g1.compress,
+      wb: commitment(d - b, 1) |> g1.compress,
+      lb: commitment(0, 3) |> g1.compress,
+    }
+  prove(rp)
+}
+
+test build_a_bad_range_proof1() fail {
+  let a: Int = 10
+  let b: Int = 0
+  let d: Int = 17
+  let rp: RangeProof =
+    RangeProof {
+      yb: commitment(a - d, 1) |> g1.compress,
+      db: g1.add(commitment(d, 1), commitment(d, 1)) |> g1.compress,
+      pb: commitment(0, 3) |> g1.compress,
+      ab: commitment(a, 1) |> g1.compress,
+      bb: commitment(b, 1) |> g1.compress,
+      wb: commitment(d - b, 1) |> g1.compress,
+      lb: commitment(0, 3) |> g1.compress,
+    }
+  prove(rp)
+}
+
+test build_a_bad_range_proof2() fail {
+  let a: Int = 10
+  let b: Int = 0
+  let d: Int = 7
+  let rp: RangeProof =
+    RangeProof {
+      yb: commitment(a - d, 1) |> g1.compress,
+      db: g1.add(commitment(d, 1), commitment(d, 1)) |> g1.compress,
+      pb: commitment(0, 5) |> g1.compress,
       ab: commitment(a, 1) |> g1.compress,
       bb: commitment(b, 1) |> g1.compress,
       wb: commitment(d - b, 1) |> g1.compress,

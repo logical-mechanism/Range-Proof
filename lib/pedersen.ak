@@ -23,3 +23,10 @@ test commit_to_square() {
 test simple_addition() {
   g1.add(commitment(1, 2), commitment(2, 1)) == commitment(3, 3)
 }
+
+test sum_the_randomness() {
+  g1.add(commitment(1, 2), commitment(2, 1)) == g1.add(
+    commitment(0, 3),
+    commitment(3, 0),
+  )
+}
