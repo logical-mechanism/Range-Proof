@@ -1,0 +1,12 @@
+license: CC-by
+author:
+  name: Quinn Parkinson
+  surname: Parkinson
+  affil: 1
+  email: quinn@logicalmechanism.io
+affiliation:
+  name: Logical Mechanism LLC
+  country: {USA} Research \& Design
+version: preprint
+title: zkInterval: Trustless Confidential Fixed-Size Range Proofs
+keywords: confidentiality, cryptography, information hiding, trustless, zero-knowledge
