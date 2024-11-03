@@ -223,10 +223,9 @@ The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
-We implemented zkInterval using the BLS12381 curve with Aiken for the Cardano blockchain. The resultant proof size is 2.1K in json format using the ZKInterval type. This can be compressed further by creating a hexadecimal string with a size of 992 bytes. In string form, the proof can be deconstructed by selecting off the required elements and scalars.
+We implemented zkInterval using the BLS12381 curve with Aiken for the Cardano blockchain. The resultant proof size is 2.1K in json format using the ZKInterval type defined in the appendix. This can be compressed further by creating a hexadecimal string with a size of 992 bytes. In string form, the proof can be deconstructed by selecting off the required elements and scalars.
 
 Using the json form of the proof in Aiken results in a constant time and memory computation. No matter the interval length, the same amount of time and memory are consumed. Using the built-in Plutus counter in Aiken, the resultant computation time should be around 0.25 seconds with nearly negligible memory requirements. Proof generation time is highly dependent upon the language used during implementation.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
