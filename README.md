@@ -4,7 +4,7 @@ Ensuring that a value falls within a specific interval while keeping the value c
 
 ## tl;dr
 
-The zkInterval protocol proves the statement $$ a \geq d \geq b $$ where $a$ and $b$ are public, $a \geq b$, and $a, b, d \in \mathbb{Z}^+$. It does not require a trusted setup, is completely confidential, and each proof is fixed-size no matter that interval size.
+The zkInterval protocol proves the statement $a \geq d \geq b$ where $a$ and $b$ are public, $a \geq b$, and $a, b, d \in \mathbb{Z}^+$. It does not require a trusted setup, is completely confidential, and each proof is fixed-size no matter that interval size.
 
 ## In This Repo
 
