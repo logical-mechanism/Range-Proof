@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.2)  2 NOV 2024 22:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.2)  3 NOV 2024 00:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1465,7 +1465,28 @@ c/dvips/lm/lm-mathsy.enc}]
 
 LaTeX Warning: Citation `silverman86' on page 3 undefined on input line 127.
 
-[3] [4]
+[3]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.226 We implemented zkInterval using the `BLS12_
+                                                 381` curve with Aiken for t...
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.227 
+      
+? 
+
+Overfull \hbox (43.5577pt too wide) in paragraph at lines 226--227
+\T1/lmr/m/n/10 (-20) We im-ple-mented zk-In-ter-val us-ing the `BLS12$[]\OT1/lm
+r/m/n/10 (-20) 81`\OML/lmm/m/it/10 curvewithAikenfortheCardanoblockchain:Weused
+$ 
+ []
+
+[4]
 No file zkInterval-2024.bbl.
 [5] (./zkInterval-2024.aux)
  ***********
@@ -1476,16 +1497,13 @@ L3 programming layer <2020/03/25>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 29651 strings out of 474222
- 569246 string characters out of 5748733
- 1940975 words of memory out of 5000000
- 51181 multiletter control sequences out of 15000+600000
- 628051 words of font info for 147 fonts, out of 8000000 for 9000
+ 29654 strings out of 474222
+ 569332 string characters out of 5748733
+ 1939975 words of memory out of 5000000
+ 51185 multiletter control sequences out of 15000+600000
+ 628287 words of font info for 147 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,14n,121p,1050b,851s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
@@ -1497,12 +1515,13 @@ lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fon
 ts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
 </usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on zkInterval-2024.pdf (5 pages, 318930 bytes).
+r/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb>
+Output written on zkInterval-2024.pdf (5 pages, 345500 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
+ 215 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
  38 named destinations out of 1000 (max. 500000)
- 43590 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 44102 words of extra memory for PDF output out of 51595 (max. 10000000)
 

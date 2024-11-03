@@ -43,13 +43,13 @@
 
 Confidentially proving that a value falls within a specific interval is a rich field of research in cryptography. Many of the battle tested trustless methods used today produce proofs sizes scaling with the interval length, limiting their efficiency in applications requiring a fixed-size across variable interval lengths. ZkInterval is a protocol that overcomes this limitation by delivering fixed-size range proofs regardless of the interval length. By combining Weil pairings~\cite{menezes93}, Pedersen commitments~\cite{pc92}, and zero-knowledge Schnorr proofs~\cite{zero20}, zkInterval securely proves that a value lies within a publicly known interval without revealing the value itself in a completely trustless manner. Our results demonstrate that zkInterval reduces storage demands and is well-suited for privacy-focused applications requiring efficient handling of variable interval lengths, requiring only 9 \( \mathbb{G}_{1} \) elements and 2 \( \mathbb{Z}^+ \) scalars.
 
-Efficient privacy-preserving range proofs are essential for private information verification, secure multi-party computation, and confidential transactions. Bulletproofs \cite{bbb18} improved range proofs significantly by reducing the range proof size to sublinear, yet the proof still scales with the interval length. zkInterval addresses this issue by generating fixed-size range proofs that maintain confidentiality while ensuring scalability, making it ideal for applications like blockchain systems where efficiency and security are paramount. This paper fills a critical gap in current cryptographic methods and opens new avenues for advancing range-proof technologies.
+Efficient privacy-preserving range proofs are essential for private information verification, secure multi-party computation, and confidential transactions. Bulletproofs~\cite{bbb18} improved range proofs significantly, yet the proof still scales with the interval length. ZkInterval addresses this issue by generating fixed-size proofs that maintain confidentiality while ensuring scalability, making it ideal for applications like blockchain systems where efficiency and security are paramount.
 
 \section{Method}
 
-The derivation of zkInterval is practical and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr proofs. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr proofs.
+The derivation of zkInterval is simple, practical, and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a product of Weil pairings, and then we will finalize the range proof with two Schnorr proofs. The resulting cryptographic proof is a collection of \(\mathbb{G}_{1}\) points with \( \mathbb{Z}^+ \) scalars.
 
-We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between $a$ and $b$,
+We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between two publicly known values $a$ and $b$,
 
 \begin{equation}
 a \geq d \geq b,
@@ -67,7 +67,7 @@ and the second variable, \( w \), is defined as:
 d - b = w.
 \end{equation}
 
-By subtracting equation \ref{w_eq} from equation \ref{y_eq} and reorganizing the terms, we obtain the following equation:
+By subtracting equation~\ref{w_eq} from equation~\ref{y_eq} and reorganizing the terms, we obtain the following equation:
 
 \begin{equation}
 \label{half_eq}
@@ -81,19 +81,19 @@ Next, we introduce an additional term \( \gamma \) to both sides, resulting in t
 \gamma + a + b + w = y + 2d + \gamma.
 \end{equation}
 
-While adding the \( \gamma \) terms might initially appear redundant, it plays a crucial role when incorporating Pedersen commitments. This inclusion allows us to commit to a value of \( \gamma = 0 \) while still encapsulating the randomness from the commitment process, thus balancing the randomness by making the blinding factors of the other commitments act like secret keys \cite{mw16}.
+While adding the \( \gamma \) terms might initially appear redundant, it plays a crucial role when incorporating Pedersen commitments. This inclusion allows us to commit to a value of \( \gamma = 0 \) while still encapsulating the randomness from the commitment process, thus balancing the randomness by making the blinding factors of the other commitments act like secret keys~\cite{mw16}.
 
-To facilitate a more sophisticated exposition of the commitment proof, we shall express the Pedersen commitment scheme in its multiplicative formulation, denoted as \( C(v, r) = g^{r} h^{v} \), where \( g \) and \( h \) are designated generators within the \( \mathbb{G}_{1} \) group of our pairing-friendly elliptic curve. We will use the additive formulation to reconstitute equation \ref{full_eq} in the following manner:
+We will use the additive formulation to reconstitute equation~\ref{full_eq} in the following manner:
 
 \begin{equation}
 \label{pc_eq}
 C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(\gamma, \lambda),
 \end{equation}
-wherein \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \). By imposing \( \gamma = 0 \), equation \ref{pc_eq} reaches a state of equilibrium in its commitment form, thereby enabling each component of equation \ref{full_eq} to be encapsulated within a commitment while preserving the requisite algebraic integrity.
+wherein \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \). By imposing \( \gamma = 0 \), equation~\ref{pc_eq} reaches a state of equilibrium in its commitment form, thereby enabling each component of equation~\ref{full_eq} to be encapsulated within a commitment while preserving the requisite algebraic integrity required by equation~\ref{half_eq}.
 
-\begin{proof} [Proof of Pedersen Commitment Scheme]
-\label{commitment_proof}
-Equation \ref{full_eq} in additive form is:
+To facilitate a simple exposition of the commitment proof, we shall express the Pedersen commitment scheme in its multiplicative formulation, denoted as \( C(v, r) = g^{r} h^{v} \), where \( g \) and \( h \) are designated generators within the \( \mathbb{G}_{1} \) group of our pairing-friendly elliptic curve. 
+
+\begin{proof} [Proof of Pedersen Commitment Scheme]\label{commitment_proof}
 \begin{equation}
 C(y, r_{y}) + 2 C(d, r_{d}) + C(0, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(0, \lambda).
 \end{equation}
@@ -114,30 +114,30 @@ The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cance
 \begin{equation}
 h^{y + 2 d} = h^{a + b + w}
 \end{equation}
-We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
+We know from equation~\ref{half_eq} that $a + b + w - y - 2d = 0$ thus
 \begin{equation}
 h^{a + b + w - y - 2 d} = h^{0} = 1
 \end{equation}
 \end{proof}
 
-The prover must possess comprehensive knowledge of all blinding factors and their aggregate sums and is responsible for constructing the proof with the necessary mathematical rigor. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation \ref{full_eq} is encapsulated within a commitment.
+The prover is responsible for constructing the proof with the necessary mathematical rigor by possessing comprehensive knowledge of all the blinding factors and their aggregate sums. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation~\ref{full_eq} is encapsulated within a commitment.
 
-Now that we have equation \ref{full_eq} and equation \ref{pc_eq}, we know by proof \ref{commitment_proof} that the relationship between the variables will hold. However, if we use equation \ref{pc_eq}, we need additional proofs for each commitment. One way to address this problem is using Weil pairings, which enable global verification, verifying that all the relationships among the commitments hold as expected without having to prove each commitment individually.
+Now that we have equation~\ref{full_eq} and equation~\ref{pc_eq}, and we know by proof~\ref{commitment_proof} that the relationship between the variables will hold. However, if we use equation~\ref{pc_eq}, we will need additional proofs for each commitment. One way to address this problem is by using Weil pairings to verify that all the relationships among the commitments hold as expected without having to prove each commitment individually.
 
-The last part of the proof derivation relies on the identity, Galois invariant, and bilinear properties \cite{silverman86} of a Weil pairing. Without loss of generality, we will use the following notation for a Weil pairing:
+The last part of the proof derivation relies on the identity, Galois invariant, and bilinear properties~\cite{silverman86} of a Weil pairing. Without loss of generality, we will use the following notation for a Weil pairing:
 
 \begin{equation}
 e(Q, P) \rightarrow e(Q, C),
 \end{equation}
-where \( Q \) is a fixed \( \mathbb{G}_{2} \) point and \(C\) is a Pedersen commitment as a \( \mathbb{G}_{1} \) point on pairing friendly curve. The Galois invariant property is:
+where \( Q \) is a fixed \( \mathbb{G}_{2} \) element and \(C\) is a Pedersen commitment as a \( \mathbb{G}_{1} \) element on pairing friendly curve. The Galois invariant property is:
 
 \begin{equation}
-e(Q, P)^v = e(Q, v P) \rightarrow e(Q, C(v, r_{v})),
+e{(Q, P)}^{v} = e(Q, v P) \rightarrow e(Q, C(v, r_{v})),
 \end{equation}
 where $r_{v}$ is a random blinding factor for the scaler $v$. The identity property is:
 
 \begin{equation}
-e(Q, C(v, r_{v}))^{k} = 1,
+e{(Q, C(v, r_{v}))}^{k} = 1,
 \end{equation}
 when \( k = 0 \). The bilinear property is:
 
@@ -145,10 +145,10 @@ when \( k = 0 \). The bilinear property is:
 e(Q, C(v, r_{v}) + C(u, r_{u})) = e(Q, C(v, r_{v}))e(Q, C(u, r_{u})),
 \end{equation}
 
-We start with equation \ref{full_eq} and will work our way into the Weil pairing commitment form similar to equation \ref{pc_eq}. First, rewrite equation \ref{full_eq} in standard form and substitute the expression for \( k \) using the identity property of a Weil pairing. The resulting equation is:
+We start with equation~\ref{full_eq} and will work our way into the Weil pairing similar to equation~\ref{pc_eq}. First, rewrite equation~\ref{full_eq} in standard form and substitute the expression for \( k \) using the identity property of a Weil pairing. The resulting equation is:
 
 \begin{equation}
-e(Q, C(v, r_{v}))^{y + 2d + \gamma - \gamma - a - b - w} = 1.
+e{(Q, C(v, r_{v}))}^{y + 2d + \gamma - \gamma - a - b - w} = 1.
 \end{equation}
 
 Expand, group terms, and simplify using the invariant and bilinear properties:
@@ -163,7 +163,7 @@ By further simplifying and evaluating \( \gamma \), we derive the final pairing 
 e(Q, Y + D + \Psi)e(-Q, A + B + W + \Lambda) = 1,
 \end{equation}
 
-Here, the variables are defined as follows:
+The variables are defined as follows:
 
 \begin{itemize}
     \item \( \Psi = C(0, \psi) \) and \( \Lambda = C(0, \lambda) \), where \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) represent linear combinations of the blinding factors,
@@ -179,13 +179,15 @@ The proof of the Weil pairing is the hexadecimal string:
 \pi = Y | D | \Psi | A | B | W | \Lambda.
 \end{equation}
 
-To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the public endpoints are inside the proof. The commitment for an endpoint in multiplicative form:
+To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the public known interval endpoints are inside the proof. We need to construct two additional proofs for these endpoint values. 
+
+The commitment for an endpoint in multiplicative form is
 
 \begin{equation}
-A = g^{r_{a}} h^{a},
+A = g^{r_{a}} h^{a}.
 \end{equation}
 
-Given that \( a \) is public and known, we can create a new commitment, \( C_{r_a} \), to prove knowledge of the randomness \( r_a \), thus proving $A$ does indeed use the endpoint \(a\). The commitment \( C_{r_a} \) expresses itself as:
+Given that \( a \) is public and known, we can create a new commitment, \( C_{r_a} \), to prove knowledge of the randomness \( r_a \), thus proving that the element $A$ does indeed use the endpoint \(a\). The commitment \( C_{r_a} \) expresses itself as:
 
 \begin{equation}
 C_{r_a} = A - C(a, 0) = g^{r_{a}}.
@@ -193,9 +195,9 @@ C_{r_a} = A - C(a, 0) = g^{r_{a}}.
 where \( r_{a} \) is the blinding factor. The Schnorr proof for this commitment proceeds as follows:
 
 \begin{proof}[Proof of Schnorr Proof]
-Select a random value \( \alpha \), where \( \alpha \in \mathbb{Z}^+ \). Compute a challenge value
+Select a random value \( \alpha \), where \( \alpha \in \mathbb{Z}^+ \) and compute a challenge value
 \begin{equation}
-c = H(g^{\alpha} | g^{r_{a}}), 
+c = H(g | g^{\alpha} | g^{r_{a}}), 
 \end{equation}
 using the Fiat-Shamir heuristic and a public hash function \( H \). Then compute 
 \begin{equation}
@@ -207,27 +209,29 @@ g^{z} = g^{\alpha} \cdot C_{r_a}^{c}.
 \end{equation}
 Since 
 \begin{equation}
-g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\alpha} \cdot (g^{r_{a}})^{c} = g^{\alpha} \cdot C_{r_a}^{c},
+g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\alpha} \cdot {(g^{r_{a}})}^{c} = g^{\alpha} \cdot C_{r_a}^{c},
 \end{equation}
 the proof holds.
 \end{proof}
 
-The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr proofs, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
+The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr proofs, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is:
 
 \begin{equation}
-\pi = Y | D | \Psi | A | B | W | \Lambda | g^{r_{a}} | g^{r_{b}} | Z_{a} | Z_{b}.
+\pi = Y | D | \Psi | A | B | W | \Lambda | z_{a} | g^{r_{a}} | z_{b} | g^{r_{b}}.
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
-This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
+We implemented zkInterval using the BLS12381 curve with Aiken for the Cardano blockchain. The resultant proof size is 2.1K in json format using the ZKInterval type. This can be compressed further by creating a hexadecimal string with a size of 992 bytes. In string form, the proof can be deconstructed by selecting off the required elements and scalars.
+
+Using the json form of the proof in Aiken results in a constant time and memory computation. No matter the interval length, the same amount of time and memory are consumed. Using the built-in Plutus counter in Aiken, the resultant computation time should be around 0.25 seconds with nearly negligible memory requirements. Proof generation time is highly dependent upon the language used during implementation.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-Authors should discuss the results and how they can be interpreted from the perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
+TODO
 
 \section{Bibliography}
 \bibliography{biblio}
