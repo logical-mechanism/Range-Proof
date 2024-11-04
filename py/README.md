@@ -21,8 +21,9 @@ Use `pytest` for testing.
 pytest
 ```
 
-
 # Use
+
+The python script `zk_interval.py` is designed to output the datum / redeemer file for a smart contract.
 
 ```bash
 python3 zk_interval.py --value 42 --lower 0 --upper 100 --file_path datum.json
