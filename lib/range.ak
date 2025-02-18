@@ -1,14 +1,14 @@
 use aiken/builtin
 use aiken/crypto/bls12_381/g1
-use aiken/crypto/bls12_381/g2
-use constants.{q, qi}
+use constants.{q}
 use pedersen.{commitment}
 
-// These are the compressed g1 elements in the weil pairing
-//
-// e(Q, Y + D + P) * e(-Q, A + B + W + L) == 1
-//
-// see paper for details
+/// These are the compressed g1 elements in the weil pairing
+///
+/// e(Q, Y + D + P) * e(-Q, A + B + W + L) == 1
+/// e(Q, Y + D + P) == e(Q, A + B + W + L)
+///
+/// @See paper for details
 pub type RangeProof {
   yb: ByteArray,
   db: ByteArray,
@@ -35,14 +35,11 @@ pub fn prove(rp: RangeProof) -> Bool {
   let right: G1Element = a |> g1.add(b) |> g1.add(w) |> g1.add(l)
   //
   // create the weil pairings
-  let positive: MillerLoopResult = builtin.bls12_381_miller_loop(left, q)
-  let negative: MillerLoopResult = builtin.bls12_381_miller_loop(right, qi)
+  let left_pair: MillerLoopResult = builtin.bls12_381_miller_loop(left, q)
+  let right_pair: MillerLoopResult = builtin.bls12_381_miller_loop(right, q)
   //
   // the multiplication of the negative and positive must be the loop of zero
-  builtin.bls12_381_final_verify(
-    builtin.bls12_381_mul_miller_loop_result(positive, negative),
-    builtin.bls12_381_miller_loop(g1.zero, g2.zero),
-  )
+  builtin.bls12_381_final_verify(left_pair, right_pair)
 }
 
 test simple_range_proof() {

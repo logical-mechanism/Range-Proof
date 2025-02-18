@@ -13,10 +13,14 @@ Python code for generating the proofs and Aiken code for on-chain validation of 
 Current memory and steps estimate with Aiken:
 
 ```
-[mem: 116670, cpu: 2687440785]
+[mem: 100336, cpu: 2226339408]
 ```
 
-Estimate cost is about 200,000 Lovelace to compute on-chain.
+```
+0.0577 * 100336 + 0.0000721 * 2226339408 = 166308
+```
+
+Estimate cost is about 167,000 Lovelace to compute on-chain.
 
 ## The Paper
 

@@ -12,10 +12,6 @@ pub const h: G1Element =
 pub const q: G2Element =
   #<Bls12_381, G2>"93e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb8"
 
-//q^-1
-pub const qi: G2Element =
-  #<Bls12_381, G2>"b3e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb8"
-
 test create_g() {
   builtin.bls12_381_g1_scalar_mul(1, g) == g
 }
@@ -26,8 +22,4 @@ test create_h() {
 
 test create_q() {
   builtin.bls12_381_g2_scalar_mul(1, q) == q
-}
-
-test create_qi() {
-  builtin.bls12_381_g2_neg(q) == qi
 }

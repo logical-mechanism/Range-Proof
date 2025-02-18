@@ -51,7 +51,7 @@ class Range:
             self.lower_bound = 0
         # lower bound cant be smaller then the identiy
         if self.lower_bound < 0:
-            raise ValueError("Invalid range proof: Lower bound must be greater than zero.")
+            raise ValueError("Invalid range proof: Lower bound must be greater than or equal to zero.")
 
         # Set up D commitment
         self.D_commit = Commitment(self.secret_value)
@@ -59,13 +59,13 @@ class Range:
         # Set up Y commitment
         y = self.upper_bound - self.secret_value
         if y < 0:
-            raise ValueError("Invalid range proof: Y value must be greater than zero.")
+            raise ValueError("Invalid range proof: Y value must be greater than or equal to zero.")
         self.Y_commit = Commitment(y)
 
         # Set up W commitment
         w = self.secret_value - self.lower_bound
         if w < 0:
-            raise ValueError("Invalid range proof: W value must be greater than zero.")
+            raise ValueError("Invalid range proof: W value must be greater than or equal to zero.")
         self.W_commit = Commitment(w)
 
         # Set up A and B commitments with public randomness
