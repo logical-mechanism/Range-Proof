@@ -6,7 +6,7 @@ author:
   email: quinn@logicalmechanism.io
 affiliation:
   name: Logical Mechanism LLC
-  country: {USA} Research \& Design
+  country: USA
 version: preprint
-title: zkInterval: Trustless Confidential Fixed-Size Range Proofs
+title: zkInterval: Trustless, Confidential, Fixed-Size Range Proofs
 keywords: confidentiality, cryptography, information hiding, trustless, zero-knowledge
