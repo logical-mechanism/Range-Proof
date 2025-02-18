@@ -86,7 +86,7 @@ def main():
     parser.add_argument('--upper', type=int, required=True,
                         help='The upper bound')
     parser.add_argument('--file_path', type=str, required=True,
-                        help='The file path to be used later')
+                        help='The datum file path')
 
     # Parse arguments
     args = parser.parse_args()

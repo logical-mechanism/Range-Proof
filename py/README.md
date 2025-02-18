@@ -22,5 +22,6 @@ pytest
 Use `zk_interval.py` to generate proofs.
 
 ```bash
+# Example: Prove 100 >= 42 >= 0
 python3 zk_interval.py --value 42 --lower 0 --upper 100 --file_path datum.json
 ```

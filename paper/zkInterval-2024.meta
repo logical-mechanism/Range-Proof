@@ -8,5 +8,5 @@ affiliation:
   name: Logical Mechanism LLC
   country: USA
 version: preprint
-title: zkInterval: Trustless, Confidential, Fixed-Size Range Proofs
+title: zkInterval: Trustless, Confidential, Constant-Size Range Proofs
 keywords: confidentiality, cryptography, information hiding, trustless, zero-knowledge
