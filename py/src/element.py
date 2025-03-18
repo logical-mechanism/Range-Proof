@@ -1,6 +1,5 @@
-# src/Registry/element.py
 from dataclasses import dataclass
-
+from typing import Self
 from src.blake2b_224 import generate
 from src.bls12_381 import combine, compress, invert, scale, uncompress
 
@@ -18,26 +17,26 @@ class Element:
     def hash(self) -> str:
         return generate(self.value)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
-    def __add__(self, other):
+    def __add__(self, other) -> Self:
         if not isinstance(other, Element):
             return NotImplemented
         return Element(combine(self.value, other.value))
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> Self:
         if not isinstance(other, int):
             return NotImplemented
         return Element(scale(self.value, other))
 
-    def __rmul__(self, other):
+    def __rmul__(self, other) -> Self:
         return self.__mul__(other)
 
-    def __invert__(self):
+    def __invert__(self) -> Self:
         return Element(invert(self.value))
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, Element):
             return NotImplemented
         return self.value == other.value

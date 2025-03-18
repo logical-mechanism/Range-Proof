@@ -38,7 +38,7 @@ class Range:
     Q: Element = field(init=False)
     QI: Element = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         # if upper bound is not set then it becomes field prime minus one
         if self.upper_bound is None:
             self.upper_bound = field_order - 1
@@ -80,10 +80,10 @@ class Range:
         self.right = Commitment(0, self.A_commit.r + self.B_commit.r + self.W_commit.r)
         self.left = Commitment(0, self.Y_commit.r + self.D_commit.r + self.D_commit.r)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Range(\nY={self.Y_commit.c},\n{(self.D_commit + self.D_commit).c},\nR={self.right.c},\nW={self.W_commit.c},\nL={self.left.c}\n)"
 
-    def schnorr(self, z_a, a_c, flag):
+    def schnorr(self, z_a, a_c, flag) -> bool:
         if flag is True:
             r_commitment = self.A_commit - Commitment(self.upper_bound, 0)
         else:
@@ -104,7 +104,7 @@ class Range:
         # Verifying that the commitments are consistent with the expected range proof
         return check_p and check_a and check_b
 
-    def generate_proof(self):
+    def generate_proof(self) -> dict:
         # do the schnorr proofs
         r_upper_commitment = self.A_commit - Commitment(self.upper_bound, 0)
         r_lower_commitment = self.B_commit - Commitment(self.lower_bound, 0)
@@ -141,7 +141,7 @@ class Range:
         return data
 
     @staticmethod
-    def verify_proof(proof, lower_bound, upper_bound):
+    def verify_proof(proof, lower_bound, upper_bound) -> bool:
         #
         # Verify A
         #

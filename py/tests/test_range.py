@@ -165,7 +165,7 @@ def test_lower_range_value():
 
 def test_null_range_value():
     lower = 0
-    upper = 0  # oldest ever is 122
+    upper = 0
     age = 0
     r = Range(secret_value=age, lower_bound=lower, upper_bound=upper)
 

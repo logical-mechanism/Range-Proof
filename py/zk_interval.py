@@ -42,7 +42,7 @@ def zk_data(proof: dict, lower: int, upper: int, file_path: str) -> None:
     save_proof_to_json(data, file_path)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Generate a range proof based on a value, lower bound, and upper bound.\n\n"
@@ -75,7 +75,7 @@ def main():
     args = parser.parse_args()
 
     # Create Range object and generate proof
-    print(f"Prove {args.upper} >= {args.value} >= {args.lower}")
+    print(f"Prove: {args.upper} >= {args.value} >= {args.lower}")
     r = Range(secret_value=args.value, lower_bound=args.lower, upper_bound=args.upper)
     proof = r.generate_proof()
     print(f"Is the Proof Valid? {r.verify_proof(proof, args.lower, args.upper)}")

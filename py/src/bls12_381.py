@@ -141,7 +141,7 @@ def pair(g2_element: str, g1_element: str, final_exponentiate: bool = True) -> F
     return pairing(uncompress(g2_element), uncompress(g1_element), final_exponentiate)
 
 
-def hash_to_g2(message: str):
+def hash_to_g2(message: str) -> str:
     """
     Generate a G2 point from a hex message string.
 
