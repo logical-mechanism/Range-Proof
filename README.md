@@ -17,13 +17,13 @@ python3 zk_interval.py --value 42 --lower 0 --upper 100 --file_path datum.json
 
 Current memory and steps estimate with Aiken:
 
-```
+```bash
 [mem: 100336, cpu: 2226339408]
 
 0.0577 * 100336 + 0.0000721 * 2226339408 = 166308
 ```
 
-Estimate cost is about 167,000 Lovelace to compute on-chain.
+Estimate cost is about 166,308 Lovelace to compute on-chain.
 
 ## The Paper
 

@@ -1,6 +1,6 @@
 # zkInterval Proof Generation
 
-# Setup
+## Setup
 
 ```bash
 python3 -m venv venv
@@ -8,7 +8,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# Test
+## Test
 
 Use `pytest` for testing.
 
@@ -17,9 +17,9 @@ pytest
 ```
 
 
-# Use
+## Generation
 
-Use `zk_interval.py` to generate proofs.
+Use `zk_interval.py` to generate proofs for Cardano.
 
 ```bash
 # Prove: 100 >= 42 >= 0
