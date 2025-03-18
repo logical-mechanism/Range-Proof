@@ -2,7 +2,7 @@ from binascii import unhexlify
 from hashlib import blake2b
 
 
-def hash_function():
+def hash_function() -> type[blake2b]:
     """
     Assigns sha3_256 as a hash function for the hash to g2 function inside the bls12-381 module.
 

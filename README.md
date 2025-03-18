@@ -10,15 +10,20 @@ The zkInterval protocol proves the statement $a \geq d \geq b$ where $a$ and $b$
 
 Python code for generating the proofs and Aiken code for on-chain validation of the proofs. The on-chain Cardano form of the proof is about 2.2 Kb.
 
+```bash
+# Prove: 100 >= 42 >= 0
+python3 zk_interval.py --value 42 --lower 0 --upper 100 --file_path datum.json
+```
+
 Current memory and steps estimate with Aiken:
 
-```
+```bash
 [mem: 100336, cpu: 2226339408]
 
 0.0577 * 100336 + 0.0000721 * 2226339408 = 166308
 ```
 
-Estimate cost is about 167,000 Lovelace to compute on-chain.
+Estimate cost is about 166,308 Lovelace to compute on-chain.
 
 ## The Paper
 

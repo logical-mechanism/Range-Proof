@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-
+from typing import Self
 from src.blake2b_224 import generate
 from src.bls12_381 import field_order, g1_point, rng
 from src.element import Element
@@ -28,7 +28,7 @@ class Commitment:
 
     c: Element = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         # this are fixed inside of a commitment
         g = Element(g1_point(1))
         h = Element(g1_point(2))
@@ -40,10 +40,10 @@ class Commitment:
     def hash(self) -> str:
         return generate(self.c.value)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Commitment(c={self.c}, r={self.r}, v={self.v})"
 
-    def __add__(self, other):
+    def __add__(self, other) -> Self:
         if not isinstance(other, Commitment):
             return NotImplemented
         # Add the r values
@@ -53,7 +53,7 @@ class Commitment:
         # Create a new Commitment instance with combined values
         return Commitment(combined_v, combined_r)
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> Self:
         if not isinstance(other, Commitment):
             return NotImplemented
         # Add the r values
@@ -63,12 +63,12 @@ class Commitment:
         # Create a new Commitment instance with combined values
         return Commitment(combined_v, combined_r)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, Commitment):
             return NotImplemented
         return self.c == other.c and self.r == other.r and self.v == other.v
 
-    def prove_knowledge_of_r(self, value: int):
+    def prove_knowledge_of_r(self, value: int) -> bool:
         v_commitment = Commitment(value, 0)
         r_commitment = self - v_commitment
         alpha = rng()
