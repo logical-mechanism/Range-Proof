@@ -8,7 +8,7 @@
 \license{CC-by}
 
 \title[running = {zkInterval},
-      ]{zkInterval: Trustless Confidential Fixed-Size Range Proofs}
+      ]{zkInterval: Trustless, Confidential, Constant-Size Range Proofs}
 
 \addauthor[inst     = {1},
            onclick  = {https://www.logicalmechanism.io/},
@@ -29,25 +29,27 @@
 
 % Provide the abstract of your paper
 \begin{abstract}
-  Ensuring that a value falls within a specific interval while keeping the value confidential is a crucial challenge for privacy-preserving technologies. Existing range proof methods often produce proofs whose sizes increase with the interval length, leading to inefficiencies in applications requiring fixed-size proofs. In this paper, we introduce zkInterval, a novel zero-knowledge range proof protocol that delivers fixed-size proofs regardless of the interval size. Combining Pedersen commitments with zero-knowledge proofs, zkInterval securely confirms that a value is within a public interval without revealing it or requiring a trusted setup. The consistent proof size irrespective of the interval length significantly reduces storage, making zkInterval particularly well-suited for privacy-focused applications with variable interval lengths. The zkInterval protocol enhances the efficiency and scalability of cryptographic range proofs, providing a reliable and efficient solution to contemporary cryptographic demands.
+  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing it or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
 \end{abstract}
 
 % A separate text-only abstract must be supplied in your final version.
 % This will be used for web pages and indexing and should not contain macros.
 \begin{textabstract}
-  Ensuring that a value falls within a specific interval while keeping the value confidential is a crucial challenge for privacy-preserving technologies. Existing range proof methods often produce proofs whose sizes increase with the interval length, leading to inefficiencies in applications requiring fixed-size proofs. In this paper, we introduce zkInterval, a novel zero-knowledge range proof protocol that delivers fixed-size proofs regardless of the interval size. Combining Pedersen commitments with zero-knowledge proofs, zkInterval securely confirms that a value is within a public interval without revealing it or requiring a trusted setup. The consistent proof size irrespective of the interval length significantly reduces storage, making zkInterval particularly well-suited for privacy-focused applications with variable interval lengths. The zkInterval protocol enhances the efficiency and scalability of cryptographic range proofs, providing a reliable and efficient solution to contemporary cryptographic demands.
+  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing it or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
 \end{textabstract}
 
 % The content of the paper starts here
 \section{Introduction}
 
-Proving that a value falls within a specific interval while keeping the value confidential is a significant challenge in cryptographic proofs. Traditional methods produce proofs whose size scales with the interval length, limiting their efficiency, especially in applications requiring a constant proof size across variable intervals. This paper introduces zkInterval, a protocol that overcomes this limitation by delivering fixed-size range proofs regardless of the interval length. By combining Weil pairings \cite{menezes93}, Pedersen commitments \cite{pc92}, and zero-knowledge Schnorr proofs \cite{zero20}, zkInterval securely proves that a value lies within a publicly known interval without revealing the value itself. Our results demonstrate that zkInterval reduces storage demands and is well-suited for privacy-focused applications requiring efficient handling of variable interval lengths.
+Proving that a value lies within a specific interval while preserving its confidentiality poses a significant challenge in cryptographic proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency—especially in applications that demand a constant proof size across variable intervals or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing constant-size range proofs independent of the interval's range without needing a trusted setup. By integrating Weil pairings \cite{menezes93}, Pedersen commitments \cite{pc92}, and Schnorr $\Sigma$-protocols \cite{zero20}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, this capability addresses a significant need in modern cryptographic systems.
 
-Efficient privacy-preserving range proofs are essential for private information verification, secure multi-party computation, and confidential transactions. Bulletproofs \cite{bbb18} improved range proofs significantly by reducing the range proof size to sublinear, yet the proof still scales with the interval length. zkInterval addresses this issue by generating fixed-size range proofs that maintain confidentiality while ensuring scalability, making it ideal for applications like blockchain systems where efficiency and security are paramount. This paper fills a critical gap in current cryptographic methods and opens new avenues for advancing range-proof technologies.
+Although some schemes offer constant-size proofs, they often rely on trusted setups \cite{} or result in verbose proofs \cite{}. More recent advancements like Bulletproofs \cite{bbb18} have reduced proof sizes to sublinear scales; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency—attributes especially valuable in blockchain systems and other security-critical applications. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
+
+The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
 
 \section{Method}
 
-The derivation of zkInterval is practical and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr proofs. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr proofs.
+The derivation of zkInterval is practical and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr $\Sigma$-protocols. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr $\Sigma$-protocols.
 
 We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between $a$ and $b$,
 
@@ -91,13 +93,9 @@ C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w,
 \end{equation}
 wherein \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \). By imposing \( \gamma = 0 \), equation \ref{pc_eq} reaches a state of equilibrium in its commitment form, thereby enabling each component of equation \ref{full_eq} to be encapsulated within a commitment while preserving the requisite algebraic integrity.
 
-\begin{proof} [Proof of Pedersen Commitment Scheme]
+\begin{proof}[Proof of Pedersen Commitment Scheme]
 \label{commitment_proof}
-Equation \ref{full_eq} in additive form is:
-\begin{equation}
-C(y, r_{y}) + 2 C(d, r_{d}) + C(0, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(0, \lambda).
-\end{equation}
-The multiplicative form is:
+The proof of the Pedersen commitment scheme is as follows. Start with Equation \ref{pc_eq} in multiplicative form.
 \begin{equation}
 g^{r_{y}} h^{y} g^{2 r_{d}} h^{2 d} g^{\psi} = g^{r_{a}} h^{a} g^{r_{b}} h^{b} g^{r_{w}} h^{w} g^{\lambda}.
 \end{equation}
@@ -108,7 +106,7 @@ g^{r_{y} + 2 r_{d} + \psi} h^{y + 2 d}  = g^{r_{a} + r_{b} + r_{w} + \lambda}  h
 \end{equation}
 Recall that \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) which further simplifies the equation to:
 \begin{equation}
-g^{\lambda + \psi} h^{y + 2 d}  = g^{\psi + \lambda}  h^{a + b + w}
+g^{\lambda + \psi} h^{y + 2 d}  = g^{\psi + \lambda}  h^{a + b + w}.
 \end{equation}
 The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cancel out.
 \begin{equation}
@@ -118,6 +116,7 @@ We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
 \begin{equation}
 h^{a + b + w - y - 2 d} = h^{0} = 1
 \end{equation}
+
 \end{proof}
 
 The prover must possess comprehensive knowledge of all blinding factors and their aggregate sums and is responsible for constructing the proof with the necessary mathematical rigor. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation \ref{full_eq} is encapsulated within a commitment.
@@ -212,7 +211,7 @@ g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\al
 the proof holds.
 \end{proof}
 
-The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr proofs, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
+The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr $\Sigma$-protocols, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
 
 \begin{equation}
 \pi = Y | D | \Psi | A | B | W | \Lambda | g^{r_{a}} | g^{r_{b}} | Z_{a} | Z_{b}.

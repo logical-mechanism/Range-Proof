@@ -67,7 +67,7 @@ def test_age_verification_model_too_low():
     lower = 18
     upper = 25
     age = 17
-    with pytest.raises(ValueError, match="Invalid range proof: W value must be greater than zero."):
+    with pytest.raises(ValueError, match="Invalid Range Proof: W value must be greater than or equal to zero."):
         Range(secret_value=age, lower_bound=lower, upper_bound=upper)
 
 
@@ -75,7 +75,7 @@ def test_age_verification_model_too_high():
     lower = 18
     upper = 25
     age = 32
-    with pytest.raises(ValueError, match="Invalid range proof: Y value must be greater than zero."):
+    with pytest.raises(ValueError, match="Invalid Range Proof: Y value must be greater than or equal to zero."):
         Range(secret_value=age, lower_bound=lower, upper_bound=upper)
 
 
@@ -192,7 +192,7 @@ def test_null_range_value():
 
 
 def test_upper_range_value():
-    with pytest.raises(ValueError, match="Invalid range proof: Y value must be greater than zero."):
+    with pytest.raises(ValueError, match="Invalid Range Proof: Y value must be greater than or equal to zero."):
         Range(field_order)
 
 

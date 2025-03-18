@@ -44,14 +44,14 @@ class Range:
             self.upper_bound = field_order - 1
         # upper bound cant be larger than the field prime
         if self.upper_bound > field_order - 1:
-            raise ValueError("Invalid range proof: Upper bound must be less than field order.")
+            raise ValueError("Invalid Range Proof: Upper bound must be less than field order.")
 
         # if the lower bound is not set it becomes one
         if self.lower_bound is None:
             self.lower_bound = 0
         # lower bound cant be smaller then the identiy
         if self.lower_bound < 0:
-            raise ValueError("Invalid range proof: Lower bound must be greater than zero.")
+            raise ValueError("Invalid Range Proof: Lower bound must be greater than or equal to zero.")
 
         # Set up D commitment
         self.D_commit = Commitment(self.secret_value)
@@ -59,13 +59,13 @@ class Range:
         # Set up Y commitment
         y = self.upper_bound - self.secret_value
         if y < 0:
-            raise ValueError("Invalid range proof: Y value must be greater than zero.")
+            raise ValueError("Invalid Range Proof: Y value must be greater than or equal to zero.")
         self.Y_commit = Commitment(y)
 
         # Set up W commitment
         w = self.secret_value - self.lower_bound
         if w < 0:
-            raise ValueError("Invalid range proof: W value must be greater than zero.")
+            raise ValueError("Invalid Range Proof: W value must be greater than or equal to zero.")
         self.W_commit = Commitment(w)
 
         # Set up A and B commitments with public randomness
