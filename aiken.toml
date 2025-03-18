@@ -1,6 +1,6 @@
 name = "logical-mechanism/range_proof"
 version = "1.0.0"
-compiler = "v1.1.11"
+compiler = "v1.1.13"
 plutus = "v3"
 license = "Apache-2.0"
 description = "Trustless Confidential Fixed-Size Range Proofs"

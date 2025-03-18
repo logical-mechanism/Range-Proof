@@ -8,7 +8,7 @@ The zkInterval protocol proves the statement $a \geq d \geq b$ where $a$ and $b$
 
 ## In This Repo
 
-Python code for generating the proofs and Aiken code for on-chain validation of the proofs. The on-chain Cardano form of the proof is about 2.1 Kb. The proof can be compressed to 992 bytes as a single string.
+Python code for generating the proofs and Aiken code for on-chain validation of the proofs. The on-chain Cardano form of the proof is about 2.2 Kb.
 
 Current memory and steps estimate with Aiken:
 
