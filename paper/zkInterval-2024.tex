@@ -1,9 +1,5 @@
-% IACR Communications in Cryptology template file
-% This file shows how to use the iacrcc class to write a paper.
-
 \DocumentMetadata{pdfstandard=a-2u}
 \documentclass[version=preprint]{iacrcc}
-
 
 \license{CC-by}
 
@@ -47,7 +43,7 @@ Although some schemes offer constant-size proofs, they often rely on trusted set
 
 The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
 
-\section{Method}
+\section{Derivation}
 
 The derivation of zkInterval is practical and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr $\Sigma$-protocols. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr $\Sigma$-protocols.
 
