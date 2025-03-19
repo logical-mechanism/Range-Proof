@@ -1,4 +1,4 @@
-name = "logical-mechanism/range_proof"
+name = "logical-mechanism/Range-Proof"
 version = "1.0.0"
 compiler = "v1.1.13"
 plutus = "v3"
@@ -7,7 +7,7 @@ description = "Trustless Confidential Fixed-Size Range Proofs"
 
 [repository]
 user = "logical-mechanism"
-project = "range_proof"
+project = "Range-Proof"
 platform = "github"
 
 [[dependencies]]

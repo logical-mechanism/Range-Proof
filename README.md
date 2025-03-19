@@ -28,3 +28,25 @@ Estimate cost is about 166,308 Lovelace to compute on-chain.
 ## The Paper
 
 [The Paper](paper/zkInterval-2024.pdf) describing the derivation of zkInterval.
+
+
+## Getting Started In Aiken
+
+Import the library with the command:
+
+```bash
+aiken packages add logical-mechanism/Range-Proof --version main
+```
+
+Compile your project by running the command `aiken check` in your project directory. If a complete recheck is required then run the command:
+
+```bash
+rm -fr build || true
+aiken check
+```
+
+### Usage
+
+```rust
+use zk_interval.{ZKInterval, prove}
+```
