@@ -335,7 +335,13 @@ Thus, the zkInterval protocol is a zero-knowledge non-interactive proof system.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-Discussion will go here.
+This paper introduced zkInterval, a novel constant-size range-proof protocol that achieves trustlessness and confidentiality without requiring a trusted setup. Our protocol integrates Pedersen commitments, Weil pairings, and Schnorr \(\Sigma\)-protocols to form a robust and efficient proof system. In doing so, zkInterval overcomes several limitations of existing range proofs—most notably the scaling proof sizes seen in schemes such as Bulletproofs \ref{bp}—by delivering a proof whose size remains invariant regardless of the interval length.
+
+A key advantage of zkInterval is its elimination of any trusted setup, which minimizes potential vulnerabilities that arise from setup collusion or parameter compromise \ref{c}. This makes it especially attractive for decentralized and blockchain applications where trust minimization is critical. Moreover, by relying on well-established cryptographic assumptions (e.g., the hardness of the discrete logarithm problem) and leveraging the perfect hiding property of Pedersen commitments, the protocol ensures that the secret value remains confidential throughout the proof process.
+
+Our analysis confirms that zkInterval satisfies the standard security properties: completeness, soundness, and zero-knowledge. The completeness proof demonstrates that an honest prover can always generate a valid proof when the secret value \(d\) indeed lies within the interval \([b, a]\). The soundness proof ensures that a dishonest prover cannot produce a convincing proof for an invalid claim except with negligible probability. Finally, the zero-knowledge proof shows that an honest verifier learns nothing beyond the claim's validity, ensuring that the secret value is never exposed.
+
+In summary, zkInterval represents a meaningful advancement in the design of range proofs, offering a promising balance between efficiency, security, and practicality. Its constant-size, non-interactive proof system opens new avenues for privacy-preserving technologies in decentralized systems.
 
 \section{Bibliography}
 \bibliography{biblio}
