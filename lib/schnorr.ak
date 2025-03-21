@@ -47,7 +47,10 @@ test real_fiat_shamir_heuristic() {
 
 pub fn prove(zp: SchnorrProof, value: ByteArray) -> Bool {
   //
-  // the z computation: g^z = g^(r + c * x) = g^r * g^(c * x) = g^r * (g^x)^c
+  // the z computation: g^z = g^(r + c * x) 
+  //                        = g^r * g^(c * x)
+  //                        = g^r * (g^x)^c
+  //                        = g^r * u^c
   expect Some(z): Option<Scalar> = scalar.from_bytearray_big_endian(zp.z_b)
   let g_z: G1Element = g1.scale(g, z)
   //
