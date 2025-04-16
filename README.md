@@ -8,11 +8,40 @@ The zkInterval protocol proves the statement $a \geq d \geq b$ where $a$ and $b$
 
 ## In This Repo
 
+### Python
+
 Python code for generating the proofs and Aiken code for on-chain validation of the proofs. The on-chain Cardano form of the proof is about 2.2 Kb.
 
 ```bash
 # Prove: 100 >= 42 >= 0
 python3 zk_interval.py --value 42 --lower 0 --upper 100 --file_path datum.json
+```
+
+The python code requires a venv.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Aiken
+
+Import the library with the command:
+
+```bash
+aiken packages add logical-mechanism/Range-Proof --version main
+```
+
+```rust
+use zk_interval.{ZKInterval, prove}
+```
+
+Compile your project by running the command `aiken check` in your project directory. If a complete recheck is required then run the command:
+
+```bash
+rm -fr build || true
+aiken check
 ```
 
 Current memory and steps estimate with Aiken:
@@ -29,24 +58,3 @@ Estimate cost is about 166,308 Lovelace to compute on-chain.
 
 [The Paper](paper/zkInterval-2024.pdf) describing the derivation of zkInterval.
 
-
-## Getting Started In Aiken
-
-Import the library with the command:
-
-```bash
-aiken packages add logical-mechanism/Range-Proof --version main
-```
-
-Compile your project by running the command `aiken check` in your project directory. If a complete recheck is required then run the command:
-
-```bash
-rm -fr build || true
-aiken check
-```
-
-### Usage
-
-```rust
-use zk_interval.{ZKInterval, prove}
-```
