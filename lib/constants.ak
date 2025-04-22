@@ -16,6 +16,10 @@ test create_g() {
   builtin.bls12_381_g1_scalar_mul(1, g) == g
 }
 
+test add_g_to_h() {
+  builtin.bls12_381_g1_add(g, g) == h
+}
+
 test create_h() {
   builtin.bls12_381_g1_scalar_mul(2, g) == h
 }

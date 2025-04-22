@@ -19,6 +19,8 @@ pub type RangeProof {
   lb: ByteArray,
 }
 
+/// Decompress the points and do the math for the proof.
+///
 pub fn prove(rp: RangeProof) -> Bool {
   //
   // decompress the elements
@@ -60,6 +62,23 @@ test build_simple_range_proof() {
   let a: Int = 10
   let b: Int = 0
   let d: Int = 7
+  let rp: RangeProof =
+    RangeProof {
+      yb: commitment(a - d, 1) |> g1.compress,
+      db: g1.add(commitment(d, 1), commitment(d, 1)) |> g1.compress,
+      pb: commitment(0, 3) |> g1.compress,
+      ab: commitment(a, 1) |> g1.compress,
+      bb: commitment(b, 1) |> g1.compress,
+      wb: commitment(d - b, 1) |> g1.compress,
+      lb: commitment(0, 3) |> g1.compress,
+    }
+  prove(rp)
+}
+
+test can_not_use_negatives_in_range_proof() fail {
+  let a: Int = 10
+  let b: Int = -10
+  let d: Int = -7
   let rp: RangeProof =
     RangeProof {
       yb: commitment(a - d, 1) |> g1.compress,

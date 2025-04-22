@@ -20,6 +20,10 @@ test commit_to_square() {
   commitment(0, 2) == h
 }
 
+test can_not_do_negative() fail {
+  commitment(0, -2) == g
+}
+
 test simple_addition() {
   g1.add(commitment(1, 2), commitment(2, 1)) == commitment(3, 3)
 }
