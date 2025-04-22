@@ -6,13 +6,13 @@
 \title[running = {zkInterval},
       ]{zkInterval: Trustless, Confidential, Constant-Size Range Proofs}
 
-\addauthor[inst     = {1},
-           onclick  = {https://www.logicalmechanism.io/},
-           email    = {quinn@logicalmechanism.io},
-           surname  = {Parkinson}
+\addauthor[inst    = {1},
+           onclick = {https://www.logicalmechanism.io/},
+           email   = {quinn@logicalmechanism.io},
+           surname = {Parkinson}
           ]{Quinn Parkinson}
 
-\addaffiliation[ country    = {USA}
+\addaffiliation[ country = {USA}
                ]{Logical Mechanism LLC}
 
 \begin{document}
@@ -25,19 +25,19 @@
 
 % Provide the abstract of your paper
 \begin{abstract}
-  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing it or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
+  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing the value or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
 \end{abstract}
 
 % A separate text-only abstract must be supplied in your final version.
 % This will be used for web pages and indexing and should not contain macros.
 \begin{textabstract}
-  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing it or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
+  In this paper, we introduce zkInterval, a novel constant-size zero-knowledge range proof protocol that proves a secret value lies within a public interval without revealing the value or requiring a trusted setup. Leveraging Pedersen commitments and advanced zero-knowledge techniques, zkInterval offers a trustless and confidential solution with proofs whose size remains invariant regardless of the interval's range. This property significantly reduces storage and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to some critical challenges in modern cryptographic systems.
 \end{textabstract}
 
 % The content of the paper starts here
 \section{Introduction}
 
-Proving that a value lies within a specific interval while preserving its confidentiality poses a significant challenge in cryptographic proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency—especially in applications that demand a constant proof size across variable intervals or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing constant-size range proofs independent of the interval's range without needing a trusted setup. By integrating Weil pairings \cite{menezes93}, Pedersen commitments \cite{pc92}, and Schnorr $\Sigma$-protocols \cite{zero20}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, this capability addresses a significant need in modern cryptographic systems.
+Proving that a value lies within a specific interval while preserving its confidentiality poses a significant challenge in cryptographic proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency—especially in applications that demand a constant proof size across variable intervals or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing constant-size range proofs independent of the interval's range without needing a trusted setup. By integrating Weil pairings \cite[pp.62--63]{menezes93}, Pedersen commitments \cite{pc92}, and Schnorr $\Sigma$-protocols \cite{zero20}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, this capability addresses a significant need in modern cryptographic systems.
 
 Although some schemes offer constant-size proofs, they often rely on trusted setups \cite{} or result in verbose proofs \cite{}. More recent advancements like Bulletproofs \cite{bbb18} have reduced proof sizes to sublinear scales; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency—attributes especially valuable in blockchain systems and other security-critical applications. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
 
