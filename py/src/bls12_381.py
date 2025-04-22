@@ -2,26 +2,22 @@ import secrets
 
 from py_ecc.bls.g2_primitives import (G1_to_pubkey, G2_to_signature,
                                       pubkey_to_G1, signature_to_G2)
-from py_ecc.bls.hash_to_curve import hash_to_G2
 from py_ecc.fields import optimized_bls12_381_FQ as FQ
 from py_ecc.fields import optimized_bls12_381_FQ2 as FQ2
 from py_ecc.fields import optimized_bls12_381_FQ12 as FQ12
 from py_ecc.optimized_bls12_381 import (G1, G2, Z1, Z2, add, curve_order,
                                         multiply, neg, pairing)
-from src.blake2b_224 import hash_function
 
 
 def rng() -> int:
     """
-    Generates a random hex string of the specified length using the secrets module.
+    Generates a random number below the curve order.
 
     Returns:
         int: A random number below the field order.
     """
     # Generate a random byte string of the specified length
-    random_bits = secrets.randbits(255)
-    while random_bits >= curve_order:
-        random_bits = secrets.randbits(255)
+    random_bits = secrets.randbelow(curve_order)
     return random_bits
 
 
@@ -139,19 +135,6 @@ def pair(g2_element: str, g1_element: str, final_exponentiate: bool = True) -> F
         FQ12: Result of the pairing operation as an element of the FQ12 field.
     """
     return pairing(uncompress(g2_element), uncompress(g1_element), final_exponentiate)
-
-
-def hash_to_g2(message: str) -> str:
-    """
-    Generate a G2 point from a hex message string.
-
-    Args:
-        message (str): Hexadecimal string that represents a message.
-
-    Returns:
-        str: The compressed point as a hexadecimal string.
-    """
-    return compress(hash_to_G2(bytes.fromhex(message), "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_".encode("utf-8"), hash_function()))
 
 
 # identity elements

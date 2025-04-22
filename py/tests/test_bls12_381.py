@@ -1,8 +1,11 @@
 
 from src.bls12_381 import (combine, compress, g1_identity, g1_point,
                            g2_identity, g2_point, gt_identity, invert, pair,
-                           scale, uncompress)
+                           scale, uncompress, rng)
 
+def test_rng():
+    r = rng()
+    assert r > 0
 
 def test_g1_identity():
     g0 = g1_point(0)
