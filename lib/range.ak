@@ -40,7 +40,7 @@ pub fn prove(rp: RangeProof) -> Bool {
   let left_pair: MillerLoopResult = builtin.bls12_381_miller_loop(left, q)
   let right_pair: MillerLoopResult = builtin.bls12_381_miller_loop(right, q)
   //
-  // the multiplication of the negative and positive must be the loop of zero
+  // the left and right side must 
   builtin.bls12_381_final_verify(left_pair, right_pair)
 }
 

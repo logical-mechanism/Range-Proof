@@ -1,11 +1,23 @@
+from src.bls12_381 import (
+    combine,
+    compress,
+    g1_identity,
+    g1_point,
+    g2_identity,
+    g2_point,
+    gt_identity,
+    invert,
+    pair,
+    scale,
+    uncompress,
+    rng,
+)
 
-from src.bls12_381 import (combine, compress, g1_identity, g1_point,
-                           g2_identity, g2_point, gt_identity, invert, pair,
-                           scale, uncompress, rng)
 
 def test_rng():
     r = rng()
     assert r > 0
+
 
 def test_g1_identity():
     g0 = g1_point(0)
@@ -103,4 +115,9 @@ def test_exponent_identity():
     assert pair(v1g2, u1g1) ** 0 == gt_identity
 
     # e(Q,P)^(x^2 - x - 42)=1, x^2 - x - 42 = 0
-    assert pair(scale(v1g2, 7), scale(u1g1, 7)) * pair(invert(v1g2), scale(u1g1, 7)) * pair(invert(v1g2), scale(u1g1, 42)) == gt_identity
+    assert (
+        pair(scale(v1g2, 7), scale(u1g1, 7))
+        * pair(invert(v1g2), scale(u1g1, 7))
+        * pair(invert(v1g2), scale(u1g1, 42))
+        == gt_identity
+    )

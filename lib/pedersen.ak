@@ -5,7 +5,7 @@ use constants.{g, h}
 pub fn commitment(vi: Int, ri: Int) -> G1Element {
   expect Some(v): Option<Scalar> = scalar.new(vi)
   expect Some(r): Option<Scalar> = scalar.new(ri)
-  g1.add(g1.scale(h, v), g1.scale(g, r))
+  g1.scale(h, v) |> g1.add(g1.scale(g, r))
 }
 
 test commit_to_zero() {

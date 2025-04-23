@@ -23,7 +23,7 @@ def generate(input_string: str) -> str:
         str: The blake2b_224 hash digest of the input string.
     """
     # Encode the input string to bytes before hashing
-    encoded_string = input_string.encode('utf-8')
+    encoded_string = input_string.encode("utf-8")
 
     # Calculate the hash digest using blake2b_224
     hash_digest = blake2b(encoded_string, digest_size=28).hexdigest()

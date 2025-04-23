@@ -45,18 +45,18 @@ test real_fiat_shamir_heuristic() {
   ) == #"c4f2937e8317aee04a17b6ea65b2e3706aabd75dd2ebce5e6c8744ed"
 }
 
-pub fn prove(zp: SchnorrProof, value: ByteArray) -> Bool {
+pub fn prove(sp: SchnorrProof, value: ByteArray) -> Bool {
   //
   // the z computation: g^z = g^(r + c * x) 
   //                        = g^r * g^(c * x)
   //                        = g^r * (g^x)^c
   //                        = g^r * u^c
-  expect Some(z): Option<Scalar> = scalar.from_bytearray_big_endian(zp.z_b)
+  expect Some(z): Option<Scalar> = scalar.from_bytearray_big_endian(sp.z_b)
   let g_z: G1Element = g1.scale(g, z)
   //
   // use the fiat-shamir heuristic to calculate the challenge then convert it to an integer
   expect Some(c): Option<Scalar> =
-    fiat_shamir_heuristic(g1.compress(g), zp.g_r_b, value)
+    fiat_shamir_heuristic(g1.compress(g), sp.g_r_b, value)
       |> scalar.from_bytearray_big_endian()
   //
   // the u^c computation: u^c = (g^x)^c = g^(x * c)
@@ -64,7 +64,7 @@ pub fn prove(zp: SchnorrProof, value: ByteArray) -> Bool {
   //
   // check if the equation: g^z = g^r * u^c is true
   //
-  g_z |> g1.equal(g1.add(g1.decompress(zp.g_r_b), u_c))
+  g_z |> g1.equal(g1.add(g1.decompress(sp.g_r_b), u_c))
 }
 
 test a_simple_proof() {

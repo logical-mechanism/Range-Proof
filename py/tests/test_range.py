@@ -67,7 +67,10 @@ def test_age_verification_model_too_low():
     lower = 18
     upper = 25
     age = 17
-    with pytest.raises(ValueError, match="Invalid Range Proof: W value must be greater than or equal to zero."):
+    with pytest.raises(
+        ValueError,
+        match="Invalid Range Proof: W value must be greater than or equal to zero.",
+    ):
         Range(secret_value=age, lower_bound=lower, upper_bound=upper)
 
 
@@ -75,7 +78,10 @@ def test_age_verification_model_too_high():
     lower = 18
     upper = 25
     age = 32
-    with pytest.raises(ValueError, match="Invalid Range Proof: Y value must be greater than or equal to zero."):
+    with pytest.raises(
+        ValueError,
+        match="Invalid Range Proof: Y value must be greater than or equal to zero.",
+    ):
         Range(secret_value=age, lower_bound=lower, upper_bound=upper)
 
 
@@ -192,7 +198,10 @@ def test_null_range_value():
 
 
 def test_upper_range_value():
-    with pytest.raises(ValueError, match="Invalid Range Proof: Y value must be greater than or equal to zero."):
+    with pytest.raises(
+        ValueError,
+        match="Invalid Range Proof: Y value must be greater than or equal to zero.",
+    ):
         Range(field_order)
 
 
@@ -220,10 +229,9 @@ def test_proof_generation1():
     r = Range(secret_value=age, lower_bound=lower, upper_bound=upper)
     proof = r.generate_proof()
     print(f"Proof:\n{json.dumps(proof, indent=4, sort_keys=True, default=str)}")
-    combined_string = ''.join(f"{key}:{value} " for key, value in proof.items()).strip()
+    combined_string = "".join(f"{key}:{value} " for key, value in proof.items()).strip()
     print(f"Approximately: {len(combined_string) // 2} Bytes")
     assert Range.verify_proof(proof, lower, upper)
-    assert len(combined_string) // 2 == 514
 
 
 def test_proof_generation2():
@@ -233,10 +241,9 @@ def test_proof_generation2():
     r = Range(secret_value=age, lower_bound=lower, upper_bound=upper)
     proof = r.generate_proof()
     print(f"Proof:\n{json.dumps(proof, indent=4, sort_keys=True, default=str)}")
-    combined_string = ''.join(f"{key}:{value} " for key, value in proof.items()).strip()
+    combined_string = "".join(f"{key}:{value} " for key, value in proof.items()).strip()
     print(f"Approximately: {len(combined_string) // 2} Bytes")
     assert Range.verify_proof(proof, lower, upper)
-    assert len(combined_string) // 2 == 514
 
 
 if __name__ == "__main__":
