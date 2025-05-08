@@ -54,21 +54,41 @@ def main() -> None:
         epilog=(
             f"Ensure that the value falls within the specified lower and upper bounds.\n\n"
             f"Maximum Valid Range: 0 ≤ value ≤ {curve_order-1}"
-        )
+        ),
     )
 
     # Define arguments
     parser.add_argument(
-        "-v", "--value", type=int, required=True, help="The secret value to prove", metavar="VALUE"
+        "-v",
+        "--value",
+        type=int,
+        required=True,
+        help="The secret value to prove",
+        metavar="VALUE",
     )
     parser.add_argument(
-        "-l", "--lower", type=int, required=True, help="The lower bound of the interval", metavar="LOWER_BOUND"
+        "-l",
+        "--lower",
+        type=int,
+        required=True,
+        help="The lower bound of the interval",
+        metavar="LOWER_BOUND",
     )
     parser.add_argument(
-        "-u", "--upper", type=int, required=True, help="The upper bound of the interval", metavar="UPPER_BOUND"
+        "-u",
+        "--upper",
+        type=int,
+        required=True,
+        help="The upper bound of the interval",
+        metavar="UPPER_BOUND",
     )
     parser.add_argument(
-        "-f", "--file_path", type=str, required=True, help="Path to the datum file", metavar="FILE_PATH"
+        "-f",
+        "--file_path",
+        type=str,
+        required=True,
+        help="Path to the datum file",
+        metavar="FILE_PATH",
     )
 
     # Parse arguments
@@ -76,9 +96,13 @@ def main() -> None:
 
     # Create Range object and generate proof
     print(f"Prove: {args.upper} >= {args.value} >= {args.lower}")
+
     r = Range(secret_value=args.value, lower_bound=args.lower, upper_bound=args.upper)
+
     proof = r.generate_proof()
+
     print(f"Is the Proof Valid? {r.verify_proof(proof, args.lower, args.upper)}")
+
     zk_data(proof, args.lower, args.upper, args.file_path)
 
 
