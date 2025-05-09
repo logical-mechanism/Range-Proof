@@ -132,12 +132,177 @@ Although some schemes offer constant-size proofs, they often rely on trusted set
 
 The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
 
+\section{Derivation}
+
+The derivation of zkInterval is practical and systematic, structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr $\Sigma$-protocols. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr $\Sigma$-protocols.
+
+We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between $a$ and $b$,
+
+\begin{equation}
+a \geq d \geq b,
+\end{equation}
+where \( a \geq b \) and \( a, b, d \in \mathbb{Z}^+ \). We will introduce two auxiliary variables that quantify the differences between the extremal values \(a\) and \(b\) and the intermediate value \(d\) to reformulate the inequality into a polynomial. The first variable, \( y \), is defined as:
+
+\begin{equation}
+\label{y_eq}
+a - d = y,
+\end{equation}
+and the second variable, \( w \), is defined as:
+
+\begin{equation}
+\label{w_eq}
+d - b = w.
+\end{equation}
+
+By subtracting equation \ref{w_eq} from equation \ref{y_eq} and reorganizing the terms, we obtain the following equation:
+
+\begin{equation}
+\label{half_eq}
+a + b + w = y + 2d.
+\end{equation}
+
+Next, we introduce an additional term \( \gamma \) to both sides, resulting in the final fundamental equation:
+
+\begin{equation}
+\label{full_eq}
+\gamma + a + b + w = y + 2d + \gamma.
+\end{equation}
+
+While adding the \( \gamma \) terms might initially appear redundant, it plays a crucial role when incorporating Pedersen commitments. This inclusion allows us to commit to a value of \( \gamma = 0 \) while still encapsulating the randomness from the commitment process, thus balancing the randomness by making the blinding factors of the other commitments act like secret keys \cite{mw16}.
+
+To facilitate a more sophisticated exposition of the commitment proof, we shall express the Pedersen commitment scheme in its multiplicative formulation, denoted as \( C(v, r) = g^{r} h^{v} \), where \( g \) and \( h \) are designated generators within the \( \mathbb{G}_{1} \) group of our pairing-friendly elliptic curve. We will use the additive formulation to reconstitute equation \ref{full_eq} in the following manner:
+
+\begin{equation}
+\label{pc_eq}
+C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(\gamma, \lambda),
+\end{equation}
+wherein \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \). By imposing \( \gamma = 0 \), equation \ref{pc_eq} reaches a state of equilibrium in its commitment form, thereby enabling each component of equation \ref{full_eq} to be encapsulated within a commitment while preserving the requisite algebraic integrity.
+
+\begin{proof}[Proof of Pedersen Commitments]
+\label{commitment_proof}
+The proof of the Pedersen commitment scheme is as follows. Start with Equation \ref{pc_eq} in multiplicative form.
+\begin{equation}
+g^{r_{y}} h^{y} g^{2 r_{d}} h^{2 d} g^{\psi} = g^{r_{a}} h^{a} g^{r_{b}} h^{b} g^{r_{w}} h^{w} g^{\lambda}.
+\end{equation}
+Upon aggregation and simplification, the multiplicative form reduces to:
+\begin{equation}
+\label{full_form}
+g^{r_{y} + 2 r_{d} + \psi} h^{y + 2 d}  = g^{r_{a} + r_{b} + r_{w} + \lambda}  h^{a + b + w}.
+\end{equation}
+Recall that \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) which further simplifies the equation to:
+\begin{equation}
+g^{\lambda + \psi} h^{y + 2 d}  = g^{\psi + \lambda}  h^{a + b + w}.
+\end{equation}
+The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cancel out.
+\begin{equation}
+h^{y + 2 d} = h^{a + b + w}
+\end{equation}
+We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
+\begin{equation}
+h^{a + b + w - y - 2 d} = h^{0} = 1
+\end{equation}
+
+\end{proof}
+
+The prover must possess comprehensive knowledge of all blinding factors and their aggregate sums and is responsible for constructing the proof with the necessary mathematical rigor. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation \ref{full_eq} is encapsulated within a commitment.
+
+Now that we have equation \ref{full_eq} and equation \ref{pc_eq}, we know by proof \ref{commitment_proof} that the relationship between the variables will hold. However, if we use equation \ref{pc_eq}, we need additional proofs for each commitment. One way to address this problem is using Weil pairings, which enable global verification, verifying that all the relationships among the commitments hold as expected without having to prove each commitment individually.
+
+The last part of the proof derivation relies on the identity, Galois invariant, and bilinear properties \cite{silverman86} of a Weil pairing. Without loss of generality, we will use the following notation for a Weil pairing:
+
+\begin{equation}
+e(Q, P) \rightarrow e(Q, C),
+\end{equation}
+where \( Q \) is a fixed \( \mathbb{G}_{2} \) point and \(C\) is a Pedersen commitment as a \( \mathbb{G}_{1} \) point on pairing friendly curve. The Galois invariant property is:
+
+\begin{equation}
+e(Q, P)^v = e(Q, v P) \rightarrow e(Q, C(v, r_{v})),
+\end{equation}
+where $r_{v}$ is a random blinding factor for the scaler $v$. The identity property is:
+
+\begin{equation}
+e(Q, C(v, r_{v}))^{k} = 1,
+\end{equation}
+when \( k = 0 \). The bilinear property is:
+
+\begin{equation}
+e(Q, C(v, r_{v}) + C(u, r_{u})) = e(Q, C(v, r_{v}))e(Q, C(u, r_{u})),
+\end{equation}
+
+We start with equation \ref{full_eq} and will work our way into the Weil pairing commitment form similar to equation \ref{pc_eq}. First, rewrite equation \ref{full_eq} in standard form and substitute the expression for \( k \) using the identity property of a Weil pairing. The resulting equation is:
+
+\begin{equation}
+e(Q, C(v, r_{v}))^{y + 2d + \gamma - \gamma - a - b - w} = 1.
+\end{equation}
+
+Expand, group terms, and simplify using the invariant and bilinear properties:
+
+\begin{equation}
+e(Q, C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi))e(-Q, C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(\gamma, \lambda)) = 1.
+\end{equation}
+
+By further simplifying and evaluating \( \gamma \), we derive the final pairing expression:
+
+\begin{equation}
+e(Q, Y + D + \Psi)e(-Q, A + B + W + \Lambda) = 1,
+\end{equation}
+
+Here, the variables are defined as follows:
+
+\begin{itemize}
+    \item \( \Psi = C(0, \psi) \) and \( \Lambda = C(0, \lambda) \), where \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) represent linear combinations of the blinding factors,
+    \item \( Y = C(y, r_{y}) \) denotes the commitment associated with the scalar \( y \) and its corresponding blinding factor \( r_{y} \),
+    \item \( D = 2C(d, r_{d}) \) represents a doubled commitment to the scalar \( d \), with \( r_{d} \) as its blinding factor,
+    \item \( A = C(a, r_{a}) \) and \( B = C(b, r_{b}) \) are commitments to the scalars \( a \) and \( b \) respectively, with \( r_{a} \) and \( r_{b} \) as their respective blinding factors,
+    \item \( W = C(w, r_{w}) \) corresponds to the commitment associated with the scalar \( w \) and its blinding factor \( r_{w} \).
+\end{itemize}
+
+The proof of the Weil pairing is the hexadecimal string:
+
+\begin{equation}
+\pi = Y | D | \Psi | A | B | W | \Lambda.
+\end{equation}
+
+To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the public endpoints are inside the proof. The commitment for an endpoint in multiplicative form:
+
+\begin{equation}
+A = g^{r_{a}} h^{a},
+\end{equation}
+
+Given that \( a \) is public and known, we can create a new commitment, \( C_{r_a} \), to prove knowledge of the randomness \( r_a \), thus proving $A$ does indeed use the endpoint \(a\). The commitment \( C_{r_a} \) expresses itself as:
+
+\begin{equation}
+C_{r_a} = A - C(a, 0) = g^{r_{a}}.
+\end{equation}
+where \( r_{a} \) is the blinding factor. The Schnorr proof for this commitment proceeds as follows:
+
+\begin{proof}[Proof of a Schnorr $\Sigma$-protocol]
+Select a random value \( \alpha \), where \( \alpha \in \mathbb{Z}^+ \). Compute a challenge value
+\begin{equation}
+c = H(g^{\alpha} | g^{r_{a}}), 
+\end{equation}
+using the Fiat-Shamir heuristic and a public hash function \( H \). Then compute 
+\begin{equation}
+z = \alpha + c \cdot r_{a}
+\end{equation}
+and verify
+\begin{equation}
+g^{z} = g^{\alpha} \cdot C_{r_a}^{c}.
+\end{equation}
+Since 
+\begin{equation}
+g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\alpha} \cdot (g^{r_{a}})^{c} = g^{\alpha} \cdot C_{r_a}^{c},
+\end{equation}
+the proof holds.
+\end{proof}
+
+The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr $\Sigma$-protocols, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
+
+\begin{equation}
+\pi = Y | D | \Psi | A | B | W | \Lambda | g^{r_{a}} | g^{r_{b}} | Z_{a} | Z_{b}.
+\end{equation}
+
 \section{Bibliography}
-Citing papers is done in the usual way using BibTeX or \texttt{biblatex}
-commands. For example: the RSA paper~\cite{RSA78}.
-
-It is highly encouraged to use CryptoBib from \url{https://cryptobib.di.ens.fr}
-
 % This sample uses bibtex rather than biblatex.
 \bibliography{references}
 

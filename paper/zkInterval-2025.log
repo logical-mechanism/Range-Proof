@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 19:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1393,7 +1393,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 118.
 \openout5 = `zkInterval-2025.abstract'.
 
-<doclicense-CC-by-88x31.pdf, id=28, 90.3375pt x 31.61812pt>
+<doclicense-CC-by-88x31.pdf, id=32, 90.3375pt x 31.61812pt>
 File: doclicense-CC-by-88x31.pdf Graphic file (type pdf)
 <use doclicense-CC-by-88x31.pdf>
 Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 134.
@@ -1404,20 +1404,26 @@ Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 134.
 dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} </usr/share/
 texlive/texmf-dist/tex/latex/doclicense/images/doclicense-CC-by-88x31.pdf>]
 
-LaTeX Warning: Citation `RSA78' on page 2 undefined on input line 137.
+LaTeX Warning: Citation `mw16' on page 2 undefined on input line 171.
 
-iacrcc:opened as zkInterval-2025.bbl
-(./zkInterval-2025.bbl
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
-1.
+[2{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
+c/dvips/lm/lm-mathsy.enc}]
+
+LaTeX Warning: Citation `silverman86' on page 3 undefined on input line 211.
+
+[3]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+53.
 iacrcc:opened as ts1lmr.fd
  (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as ts1lmr.fd
-)
+ [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}]
+iacrcc:opened as zkInterval-2025.bbl
+ (./zkInterval-2025.bbl)
 iacrcc:closed as zkInterval-2025.bbl
- [2{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}] (./zkInterval-2025.aux)
+ [5] (./zkInterval-2025.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -1427,28 +1433,32 @@ L3 programming layer <2020/03/25>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `zkInterval-2025.out' has not changed.
-(rerunfilecheck)             Checksum: 2C3840470EB5EA416FEE902534887746;297.
+(rerunfilecheck)             Checksum: A20B7C5A5A65E995537FADC4E6820C78;389.
  ) 
 Here is how much of TeX's memory you used:
- 27500 strings out of 474222
- 504074 string characters out of 5748733
+ 27581 strings out of 474222
+ 505119 string characters out of 5748733
  1941975 words of memory out of 5000000
- 49075 multiletter control sequences out of 15000+600000
- 632102 words of font info for 150 fonts, out of 8000000 for 9000
+ 49095 multiletter control sequences out of 15000+600000
+ 633640 words of font info for 165 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,14n,121p,1404b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/pub
-lic/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
-10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.p
-fb>
-Output written on zkInterval-2025.pdf (2 pages, 271507 bytes).
+pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share
+/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/
+lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fon
+ts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
+</usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb>
+Output written on zkInterval-2025.pdf (5 pages, 337912 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 44074 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 222 PDF objects out of 1000 (max. 8388607)
+ 174 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 46130 words of extra memory for PDF output out of 51595 (max. 10000000)
 

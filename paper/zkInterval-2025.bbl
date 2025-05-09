@@ -15,8 +15,10 @@ Miranda Christ, Foteini Baldimtsi, Konstantinos~Kryptos Chalkias, Deepak Maram,
 \newblock Cryptology {ePrint} Archive, Paper 2024/430, 2024.
 \newblock URL: \url{https://eprint.iacr.org/2024/430}.
 
-\bibitem[men]{menezes1993}
-
+\bibitem[Men93]{menezes1993}
+Alfred Menezes.
+\newblock {\em Elliptic Curve Public Key Cryptosystems}.
+\newblock Kluwer Academic Publishers, 1993.
 
 \bibitem[Ped91]{pedersen1991}
 Torben~Pryds Pedersen.

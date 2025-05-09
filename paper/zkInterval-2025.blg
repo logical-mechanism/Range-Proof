@@ -8,58 +8,49 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: references.bib
-I was expecting a `,' or a `}'---line 3 of file references.bib
- :   
- :   author    = {Alfred Menezes},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "RSA78"
+Warning--I didn't find a database entry for "mw16"
+Warning--I didn't find a database entry for "silverman86"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Warning--to sort, need author, editor, or key in menezes1993
-Warning--empty author and editor in menezes1993
-Warning--empty title in menezes1993
-Warning--empty publisher in menezes1993
-Warning--empty year in menezes1993
 Warning--can't use both volume and number fields in thaler2022
 You've used 5 entries,
             3368 wiz_defined-function locations,
-            724 strings with 6389 characters,
-and the built_in function-call counts, 2725 in all, are:
-= -- 266
-> -- 101
-< -- 5
-+ -- 34
-- -- 34
-* -- 163
-:= -- 392
-add.period$ -- 16
+            728 strings with 6477 characters,
+and the built_in function-call counts, 2819 in all, are:
+= -- 283
+> -- 109
+< -- 6
++ -- 36
+- -- 36
+* -- 154
+:= -- 424
+add.period$ -- 18
 call.type$ -- 5
-change.case$ -- 32
+change.case$ -- 33
 chr.to.int$ -- 5
-cite$ -- 12
+cite$ -- 6
 duplicate$ -- 98
 empty$ -- 250
-format.name$ -- 38
-if$ -- 677
+format.name$ -- 42
+if$ -- 701
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 5
-newline$ -- 28
-num.names$ -- 12
-pop$ -- 78
+missing$ -- 6
+newline$ -- 30
+num.names$ -- 15
+pop$ -- 72
 preamble$ -- 1
-purify$ -- 39
+purify$ -- 40
 quote$ -- 0
-skip$ -- 174
+skip$ -- 183
 stack$ -- 0
-substring$ -- 100
-swap$ -- 27
-text.length$ -- 5
-text.prefix$ -- 2
+substring$ -- 99
+swap$ -- 28
+text.length$ -- 6
+text.prefix$ -- 3
 top$ -- 0
 type$ -- 32
-warning$ -- 6
-while$ -- 16
-width$ -- 7
-write$ -- 64
-(There was 1 error message)
+warning$ -- 1
+while$ -- 18
+width$ -- 8
+write$ -- 70
+(There were 3 warnings)
