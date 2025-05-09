@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 19:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,6 +965,7 @@ File: doclicense-english.ldf
 iacrcc:closed as doclicense-english.ldf
 )
 iacrcc:closed as doclicense.sty
+\c@namedproof=\count337
 iacrcc:opened as fontenc.sty
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
@@ -1033,12 +1034,12 @@ iacrcc:opened as gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 iacrcc:closed as gettitlestring.sty
-\c@section@level=\count337
+\c@section@level=\count338
 )
 iacrcc:closed as nameref.sty
 \@linkdim=\dimen281
-\Hy@linkcounter=\count338
-\Hy@pagecounter=\count339
+\Hy@linkcounter=\count339
+\Hy@pagecounter=\count340
 iacrcc:opened as pd1enc.def
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
@@ -1047,7 +1048,7 @@ Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 iacrcc:closed as pd1enc.def
-\Hy@SavedSpaceFactor=\count340
+\Hy@SavedSpaceFactor=\count341
 iacrcc:opened as puenc.def
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
@@ -1064,7 +1065,7 @@ Package hyperref Info: Plain pages OFF on input line 4194.
 Package hyperref Info: Backreferencing OFF on input line 4199.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4446.
-\c@Hy@tempcnt=\count341
+\c@Hy@tempcnt=\count342
 LaTeX Info: Redefining \url on input line 4784.
 \XeTeXLinkMargin=\dimen282
 iacrcc:opened as bitset.sty
@@ -1080,7 +1081,7 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 iacrcc:closed as bigintcalc.sty
 )
 iacrcc:closed as bitset.sty
-\Fld@menulength=\count342
+\Fld@menulength=\count343
 \Field@Width=\dimen283
 \Fld@charsize=\dimen284
 Package hyperref Info: Hyper figures OFF on input line 6063.
@@ -1097,9 +1098,9 @@ Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
 iacrcc:closed as atbegshi.sty
-\Hy@abspage=\count343
-\c@Item=\count344
-\c@Hfootnote=\count345
+\Hy@abspage=\count344
+\c@Item=\count345
+\c@Hfootnote=\count346
 )
 iacrcc:closed as hyperref.sty
 Package hyperref Info: Driver (autodetected): hpdftex.
@@ -1115,8 +1116,8 @@ kage
 with kernel methods
 )
 iacrcc:closed as atveryend.sty
-\Fld@listcount=\count346
-\c@bookmark@seq@number=\count347
+\Fld@listcount=\count347
+\c@bookmark@seq@number=\count348
 iacrcc:opened as rerunfilecheck.sty
 
 (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
@@ -1134,7 +1135,7 @@ iacrcc:closed as rerunfilecheck.sty
 \Hy@SectionHShift=\skip72
 )
 iacrcc:closed as hpdftex.def
-Package hyperref Info: Option `colorlinks' set `true' on input line 112.
+Package hyperref Info: Option `colorlinks' set `true' on input line 115.
 iacrcc:opened as ccicons.sty
 
 (/usr/share/texlive/texmf-dist/tex/latex/ccicons/ccicons.sty
@@ -1145,12 +1146,12 @@ iacrcc:opened as csquotes.sty
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
-\csq@reset=\count348
-\csq@gtype=\count349
-\csq@glevel=\count350
-\csq@qlevel=\count351
-\csq@maxlvl=\count352
-\csq@tshold=\count353
+\csq@reset=\count349
+\csq@gtype=\count350
+\csq@glevel=\count351
+\csq@qlevel=\count352
+\csq@maxlvl=\count353
+\csq@tshold=\count354
 \csq@ltx@everypar=\toks55
 iacrcc:opened as csquotes.def
 
@@ -1172,24 +1173,24 @@ iacrcc:closed as csquotes.sty
 (./zkInterval-2025.aux)
 \openout1 = `zkInterval-2025.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1230,16 +1231,16 @@ LaTeX Font Info:    ... okay on input line 112.
 iacrcc:opened as supp-pdf.mkii
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count354
+\scratchcounter=\count355
 \scratchdimen=\dimen285
 \scratchbox=\box72
-\nofMPsegments=\count355
-\nofMParguments=\count356
+\nofMPsegments=\count356
+\nofMParguments=\count357
 \everyMPshowfont=\toks56
-\MPscratchCnt=\count357
+\MPscratchCnt=\count358
 \MPscratchDim=\dimen286
-\MPnumerator=\count358
-\makeMPintoPDFobject=\count359
+\MPnumerator=\count359
+\makeMPintoPDFobject=\count360
 \everyMPtoPDFconversion=\toks57
 )
 iacrcc:closed as supp-pdf.mkii
@@ -1257,19 +1258,19 @@ e
 iacrcc:closed as epstopdf-sys.cfg
 )
 iacrcc:closed as epstopdf-base.sty
-LaTeX Info: Redefining \microtypecontext on input line 112.
-Package microtype Info: Applying patch `item' on input line 112.
-Package microtype Info: Applying patch `toc' on input line 112.
-Package microtype Info: Applying patch `eqnum' on input line 112.
-Package microtype Info: Applying patch `footnote' on input line 112.
-Package microtype Info: Applying patch `verbatim' on input line 112.
+LaTeX Info: Redefining \microtypecontext on input line 115.
+Package microtype Info: Applying patch `item' on input line 115.
+Package microtype Info: Applying patch `toc' on input line 115.
+Package microtype Info: Applying patch `eqnum' on input line 115.
+Package microtype Info: Applying patch `footnote' on input line 115.
+Package microtype Info: Applying patch `verbatim' on input line 115.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 112.
+LaTeX Info: Redefining \showhyphens on input line 115.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1280,7 +1281,7 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 iacrcc:closed as mt-cmr.cfg
-Package hyperref Info: Link coloring ON on input line 112.
+Package hyperref Info: Link coloring ON on input line 115.
 iacrcc:opened as zkInterval-2025.out
 
 (./zkInterval-2025.out)
@@ -1292,7 +1293,7 @@ iacrcc:closed as zkInterval-2025.out
 \openout6 = `zkInterval-2025.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-14.
+17.
 iacrcc:opened as ot1lmr.fd
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
@@ -1300,7 +1301,7 @@ File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as ot1lmr.fd
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-14.
+17.
 iacrcc:opened as omllmm.fd
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
@@ -1308,7 +1309,7 @@ File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as omllmm.fd
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-114.
+117.
 iacrcc:opened as omslmsy.fd
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
@@ -1316,7 +1317,7 @@ File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as omslmsy.fd
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-114.
+117.
 iacrcc:opened as omxlmex.fd
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
@@ -1324,12 +1325,12 @@ File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as omxlmex.fd
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 114.
+(Font)              <8> on input line 117.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 114.
+(Font)              <6> on input line 117.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 114.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 114
+(Font)              <5> on input line 117.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 117
 .
 iacrcc:opened as umsa.fd
 
@@ -1343,7 +1344,7 @@ iacrcc:opened as mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 iacrcc:closed as mt-msa.cfg
-LaTeX Font Info:    Trying to load font information for U+msb on input line 114
+LaTeX Font Info:    Trying to load font information for U+msb on input line 117
 .
 iacrcc:opened as umsb.fd
 
@@ -1359,10 +1360,10 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 iacrcc:closed as mt-msb.cfg
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 114.
+Package hyperref Warning: Ignoring empty anchor on input line 117.
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-14.
+17.
 iacrcc:opened as t1lmtt.fd
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1373,7 +1374,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-14.
+17.
 iacrcc:opened as t1lmss.fd
 
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
@@ -1385,37 +1386,31 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 114.
+(Font)              <10> on input line 117.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 114.
-\c@IACR@cnt=\count360
+(Font)              <7> on input line 117.
+\c@IACR@cnt=\count361
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 118.
+(Font)              <9> on input line 121.
 \openout5 = `zkInterval-2025.abstract'.
 
 <doclicense-CC-by-88x31.pdf, id=32, 90.3375pt x 31.61812pt>
 File: doclicense-CC-by-88x31.pdf Graphic file (type pdf)
 <use doclicense-CC-by-88x31.pdf>
-Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 134.
+Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 137.
 (pdftex.def)             Requested size: 36.99963pt x 12.95pt.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} </usr/share/
-texlive/texmf-dist/tex/latex/doclicense/images/doclicense-CC-by-88x31.pdf>]
-
-LaTeX Warning: Citation `mw16' on page 2 undefined on input line 171.
-
-[2{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
-c/dvips/lm/lm-mathsy.enc}]
-
-LaTeX Warning: Citation `silverman86' on page 3 undefined on input line 211.
-
-[3]
+texlive/texmf-dist/tex/latex/doclicense/images/doclicense-CC-by-88x31.pdf>] [2{
+/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/d
+vips/lm/lm-mathsy.enc}] [3]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-53.
+61.
 iacrcc:opened as ts1lmr.fd
- (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+
+(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as ts1lmr.fd
@@ -1428,19 +1423,15 @@ iacrcc:closed as zkInterval-2025.bbl
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `zkInterval-2025.out' has not changed.
 (rerunfilecheck)             Checksum: A20B7C5A5A65E995537FADC4E6820C78;389.
  ) 
 Here is how much of TeX's memory you used:
- 27581 strings out of 474222
- 505119 string characters out of 5748733
+ 27602 strings out of 474222
+ 505656 string characters out of 5748733
  1941975 words of memory out of 5000000
- 49095 multiletter control sequences out of 15000+600000
- 633640 words of font info for 165 fonts, out of 8000000 for 9000
+ 49113 multiletter control sequences out of 15000+600000
+ 633557 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,14n,121p,1404b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
@@ -1455,10 +1446,10 @@ pe1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></us
 r/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on zkInterval-2025.pdf (5 pages, 337912 bytes).
+Output written on zkInterval-2025.pdf (5 pages, 339735 bytes).
 PDF statistics:
- 222 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 231 PDF objects out of 1000 (max. 8388607)
+ 183 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  46130 words of extra memory for PDF output out of 51595 (max. 10000000)
 
