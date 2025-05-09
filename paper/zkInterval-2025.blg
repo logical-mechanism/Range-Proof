@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: zkInterval-2025.aux
+The style file: alphaurl.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--can't use both volume and number fields in thaler2022
+You've used 6 entries,
+            3368 wiz_defined-function locations,
+            732 strings with 6582 characters,
+and the built_in function-call counts, 3204 in all, are:
+= -- 324
+> -- 118
+< -- 7
++ -- 38
+- -- 38
+* -- 165
+:= -- 476
+add.period$ -- 22
+call.type$ -- 6
+change.case$ -- 38
+chr.to.int$ -- 6
+cite$ -- 7
+duplicate$ -- 109
+empty$ -- 291
+format.name$ -- 46
+if$ -- 805
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 36
+num.names$ -- 18
+pop$ -- 86
+preamble$ -- 1
+purify$ -- 46
+quote$ -- 0
+skip$ -- 214
+stack$ -- 0
+substring$ -- 106
+swap$ -- 29
+text.length$ -- 7
+text.prefix$ -- 4
+top$ -- 0
+type$ -- 40
+warning$ -- 1
+while$ -- 20
+width$ -- 9
+write$ -- 84
+(There was 1 warning)

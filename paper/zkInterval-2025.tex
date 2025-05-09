@@ -1,0 +1,455 @@
+% IACR Communications in Cryptology template file
+% This file shows how to use the iacrcc class to write a paper.
+
+%% Document mode
+% [version=xxx] where xxx is preprint, submission, or final. The default is preprint.
+%               version=submission puts line numbers into the document and makes it
+%               anonymous (which can be overridden).
+%               version=final is for submitting the final version. This requires a license
+%               to be specified.
+% [notanonymous]  Keep author names in submission mode
+%% Package options
+% [floatrow]      Load floatrow package with correct captions
+% [biblatex]      Use the biblatex package instead of bibtex. Note that options
+%                 may not be passed to biblatex at this time.
+
+% Uncomment the next line if you have TeX Live 2021 or later
+% and want to produce a PDF which complies with the PDF/A-2U standard
+% \DocumentMetadata{pdfstandard=a-2u}
+\documentclass{iacrcc}
+
+% When the *final* document mode is used
+% the authors need to provide a supported license.
+% In all other modes this information is ignored.
+% The currently provided ones are { CC-by }
+\license{CC-by}
+
+% Include LaTeX packages required by your paper
+% \usepackage{}
+
+% Provide the title of the paper
+% This should look like:
+\title[running  = {zkInterval},
+      ]{zkInterval: Trustless, Confidential, Constant-Size Range Proofs}
+% Where the options in square brackets “[ ]” are optional and control the following:
+% running:   the running title displayed in the headers
+% subtitle:  provide a subtitle
+% plaintext: a text version of the title (mandatory if macros are used in the title)
+
+% Define authors and affiliations
+% Authors are listed individually using the \addauthor tag followed by a list of affiliations.
+% The idea is that every author makes a separate call to this command.
+% This should look like:
+% \addauthor[inst      = {1,2},
+%            orcid     = 0000-0000-0000-0000,
+%            footnote  = {Thanks to my supervisor for the support.},
+%            onclick   = {https://www.mypersonalwebpage.com}
+%           ]{Alice Accomplished}
+% Where the options in square brackets “[ ]” are optional 
+% and control the following:
+% inst:     a numerical list pointing to the index of the institution 
+%           in the affiliation array.
+% orcid:    create a small clickable orcid logo next to the authors name 
+%           linking to the authors ORCID iD see: orcid.org.
+% footnote: create an author-specific footnote.
+% surname:  indicate the surname of the author for indexing purposes.
+% onclick:  define what to do when clicking on the external link logo
+%           next to the author name: e.g., can point to the academic webpage.
+% email:    define the e-mail address of this author.
+\addauthor[inst    = {1},
+           onclick = {https://www.logicalmechanism.io/},
+           email   = {quinn@logicalmechanism.io},
+           surname = {Parkinson}
+          ]{Quinn Parkinson}
+
+% The following command controls the running header for authors
+% This is optional for <= 4 authors and mandatory for > 4 authors
+% \authorrunning{Joppe W. Bos and Kevin S. McCurley}
+
+% Affiliations are listed individually using the \addaffiliation command 
+% *after* the (list of) authors using \addauthor
+% This should look like (full example):
+% \addaffiliation[ror        = 05f950310,
+%                 department = {Computer Security and Industrial Cryptography},              
+%                 street     = {Kasteelpark Arenberg 10, box 2452},
+%                 city       = {Leuven},
+%                 state      = {Vlaams-Brabant},
+%                 postcode   = {3001},
+%                 country    = {Belgium}
+%                ]{KU Leuven}
+% Where the options in square brackets “[ ]” are optional and control 
+% the following (optional information is mainly used for meta-data collection):
+% ror:        provide the Research Organization Registry (ROR) identifier 
+%             for this affiliation (see: ror.org). This is used for meta-data 
+%             collection only.
+% department: department or suborganization name
+% street:     street address
+% city:       city name
+% state:      state or province name
+% postcode:   zip or postal code
+% country:    country name. Required for [version=final]
+\addaffiliation[ country = {USA}
+               ]{Logical Mechanism LLC}
+
+% Authors should use the \addfunding macro to make sure that funding agencies
+% can find papers published under their sponsorship.
+% You can use the online tool at
+% https://publish.iacr.org/funding
+% to help you find fundref and ror identifiers.
+% Note that \addfunding *does not* automatically create footnotes or
+% an acknowledgements section to identify funding - it only collects the
+% metadata for indexing.
+% An example is:
+
+% \addfunding[country  = {europe},
+%             grantid  = {1234},
+%             fundref = {100010661}
+%            ]{Horizon 2020 Framework Programme}
+
+% A footnote can be placed on the front page without a symbol / numbering using:
+%\genericfootnote{This is the full version of our paper published at XX}
+
+\theoremstyle{definition}
+\newtheorem{namedproof}{Proof}
+
+\begin{document}
+
+\maketitle
+
+% Provide the abstract of your paper
+\begin{abstract}
+  In this paper, we introduce zkInterval, a novel constant-size range proof protocol that proves a secret value lies within a public interval without revealing the value or requiring a trusted setup. Leveraging Pedersen commitments, Weil pairings, and Schnorr $\Sigma$-protocols, zkInterval offers a practical, trustless, and confidential solution with proofs whose size remains invariant regardless of the interval's range. These properties significantly reduce complexity, storage, and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to a critical challenge in modern cryptography.
+\end{abstract}
+
+% A separate text-only abstract must be supplied in your final version.
+% This will be used for web pages and indexing and should not contain macros.
+\begin{textabstract}
+\end{textabstract}
+
+% The content of the paper starts here
+\section{Introduction}
+
+Proving that a value lies within a specific interval while preserving its confidentiality practically and efficiently poses a significant challenge in modern cryptographic range proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency, especially in applications that demand a constant proof size across variable interval lengths or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing a practical, trustless, and constant-size range proof independent of the interval's range. By integrating Weil pairings \cite[pp.62--63]{menezes1993}, Pedersen commitments \cite{pedersen1991}, and Schnorr $\Sigma$-protocols \cite[pp.310--311]{thaler2022}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, zkInterval addresses a significant need in modern cryptographic systems.
+
+Although some schemes offer constant-size proofs, they often rely on trusted setups or result in verbose proofs \cite{christetal2024}. More recent advancements like Bulletproofs \cite{bunz2018bulletproofs} have reduced proof sizes to sublinear scales, all while being trustless; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
+
+The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
+
+\section{Derivation}
+
+The derivation of zkInterval is systematic and structured into distinct sections, each addressing a specific aspect of the proof before being integrated into the final result. We begin with the primary inequality and reformulate it into a suitable polynomial representation. Once in polynomial form, we proceed with the Pedersen commitment scheme to demonstrate that the inequality holds at the commitment level. Subsequently, we will incorporate the commitment scheme into a Weil pairing for any pairing-friendly curve, and then we will finalize the proof with two Schnorr $\Sigma$-protocols. The resulting proof is a collection of \(\mathbb{G}_{1}\) points of the pairing-friendly curve with two integers for the Schnorr $\Sigma$-protocols.
+
+We begin the derivation by stating the fundamental inequality that establishes the existence of a value $d$ between $a$ and $b$,
+
+\begin{equation}
+a \geq d \geq b,
+\end{equation}
+where \( a \geq b \) and \( a, b, d \in \mathbb{Z}^+ \). We will introduce two auxiliary variables that quantify the differences between the extremal values \(a\) and \(b\) and the intermediate value \(d\) to reformulate the inequality into a polynomial. The first variable, \( y \), is defined as:
+
+\begin{equation}
+\label{y_eq}
+a - d = y,
+\end{equation}
+and the second variable, \( w \), is defined as:
+
+\begin{equation}
+\label{w_eq}
+d - b = w.
+\end{equation}
+
+By subtracting equation \ref{w_eq} from equation \ref{y_eq} and reorganizing the terms, we obtain the following equation:
+
+\begin{equation}
+\label{half_eq}
+a + b + w = y + 2d.
+\end{equation}
+
+Next, we introduce an additional term \( \gamma \) to both sides, resulting in the final fundamental equation:
+
+\begin{equation}
+\label{full_eq}
+\gamma + a + b + w = y + 2d + \gamma.
+\end{equation}
+
+While adding the \( \gamma \) terms might initially appear redundant, it plays a crucial role when incorporating Pedersen commitments. This inclusion allows us to commit to a value of \( \gamma = 0 \) while still encapsulating the randomness from the commitment process, thus balancing the randomness by making the blinding factors of the other commitments act like secret keys \cite{mimblewimble2016}.
+
+To facilitate a more familiar exposition of the commitment proof, we shall express the Pedersen commitment scheme in its multiplicative formulation, denoted as \( C(v, r) = g^{r} h^{v} \), where \( g \) and \( h \) are designated generators within the \( \mathbb{G}_{1} \) group of our pairing-friendly elliptic curve. We will use the additive formulation, \( C(v, r) = [r]g + [v]h \), to reconstitute equation \ref{full_eq} for the derivation in the following manner:
+
+\begin{equation}
+\label{pc_eq}
+C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi) = C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(\gamma, \lambda),
+\end{equation}
+wherein \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \). By imposing \( \gamma = 0 \), equation \ref{pc_eq} reaches a state of equilibrium in its commitment form, thereby enabling each component of equation \ref{full_eq} to be encapsulated within a commitment while preserving the requisite algebraic integrity.
+
+\begin{namedproof}[Proof of Pedersen Commitments]
+\phantomsection\label{commitment_proof}
+The proof of the Pedersen commitment scheme is as follows. Start with Equation \ref{pc_eq} in multiplicative form.
+\begin{equation}
+g^{r_{y}} h^{y} g^{2 r_{d}} h^{2 d} g^{\psi} = g^{r_{a}} h^{a} g^{r_{b}} h^{b} g^{r_{w}} h^{w} g^{\lambda}.
+\end{equation}
+Upon aggregation and simplification, the multiplicative form reduces to:
+\begin{equation}
+\label{full_form}
+g^{r_{y} + 2 r_{d} + \psi} h^{y + 2 d}  = g^{r_{a} + r_{b} + r_{w} + \lambda}  h^{a + b + w}.
+\end{equation}
+Recall that \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) which further simplifies the equation to:
+\begin{equation}
+g^{\lambda + \psi} h^{y + 2 d}  = g^{\psi + \lambda}  h^{a + b + w}.
+\end{equation}
+The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cancel out.
+\begin{equation}
+h^{y + 2 d} = h^{a + b + w}
+\end{equation}
+We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
+\begin{equation}
+h^{a + b + w - y - 2 d} = h^{0} = 1
+\end{equation}
+\end{namedproof}
+
+The prover must possess comprehensive knowledge of all blinding factors and their aggregate sums and is responsible for constructing the proof with the necessary mathematical rigor. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation \ref{full_eq} is encapsulated within a commitment.
+
+Now that we have equation \ref{full_eq} and equation \ref{pc_eq}, we know by proof \ref{commitment_proof} that the relationship between the variables will hold. However, if we use equation \ref{pc_eq}, we need additional proofs to open each commitment. One way to address this problem is using Weil pairings, which enable global verification, verifying that all the relationships among the commitments hold as expected without having to prove each commitment individually.
+
+The last part of the proof derivation relies on the identity, Galois invariant, and bilinear properties of a Weil pairing. Without loss of generality, we will use the following notation for a Weil pairing:
+
+\begin{equation}
+e(Q, P) \rightarrow e(Q, C),
+\end{equation}
+where \( Q \) is a fixed \( \mathbb{G}_{2} \) point and \(C\) is a Pedersen commitment as a \( \mathbb{G}_{1} \) point on pairing friendly curve. The Galois invariant property is:
+
+\begin{equation}
+e(Q, P)^v = e(v Q, P) = e(Q, v P) \rightarrow e(Q, C(v, r_{v})),
+\end{equation}
+where $r_{v}$ is a random blinding factor for the scalar $v$. The identity property is:
+
+\begin{equation}
+e(Q, C(v, r_{v}))^{k} = 1,
+\end{equation}
+when \( k = 0 \). The bilinear property is:
+
+\begin{equation}
+e(Q, C(v, r_{v}) + C(u, r_{u})) = e(Q, C(v, r_{v}))e(Q, C(u, r_{u})),
+\end{equation}
+
+We start with equation \ref{full_eq} and will work our way into the Weil pairing commitment form similar to equation \ref{pc_eq}. First, rewrite equation \ref{full_eq} in standard form and substitute the expression for \( k \) using the identity property of a Weil pairing. The resulting equation is:
+
+\begin{equation}
+e(Q, C)^{y + 2d + \gamma - \gamma - a - b - w} = 1.
+\end{equation}
+
+Expand, group terms, and simplify using the invariant and bilinear properties:
+
+\begin{equation}
+e(Q, C(y, r_{y}) + 2 C(d, r_{d}) + C(\gamma, \psi))e(-Q, C(a, r_{a}) + C(b, r_{b}) + C(w, r_{w}) + C(\gamma, \lambda)) = 1.
+\end{equation}
+
+By further simplifying and evaluating \( \gamma \), we derive the final pairing expression:
+
+\begin{equation}
+e(Q, Y + D + \Psi)e(-Q, A + B + W + \Lambda) = 1,
+\end{equation}
+
+equivalently,
+
+\begin{equation}
+  e(Q, Y + D + \Psi) = e(Q, A + B + W + \Lambda).
+  \end{equation}
+
+Here, the variables are defined as follows:
+
+\begin{itemize}
+    \item \( \Psi = C(0, \psi) \) and \( \Lambda = C(0, \lambda) \), where \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \) represent linear combinations of the blinding factors,
+    \item \( Y = C(y, r_{y}) \) denotes the commitment associated with the scalar \( y \) and its corresponding blinding factor \( r_{y} \),
+    \item \( D = 2C(d, r_{d}) \) represents a doubled commitment to the scalar \( d \), with \( r_{d} \) as its blinding factor,
+    \item \( A = C(a, r_{a}) \) and \( B = C(b, r_{b}) \) are commitments to the scalars \( a \) and \( b \) respectively, with \( r_{a} \) and \( r_{b} \) as their respective blinding factors,
+    \item \( W = C(w, r_{w}) \) corresponds to the commitment associated with the scalar \( w \) and its blinding factor \( r_{w} \).
+\end{itemize}
+
+A compact form of the proof of the Weil pairing is the hexadecimal string:
+
+\begin{equation}
+\pi = Y | D | \Psi | A | B | W | \Lambda.
+\end{equation}
+
+To complete the proof, we must show that we have correctly included the interval endpoints \( a \) and \( b \) because, in the current form, nothing proves that the public endpoints are inside the proof. The commitment for an endpoint in multiplicative form:
+
+\begin{equation}
+A = C(a, r_{a}) = g^{r_{a}} h^{a},
+\end{equation}
+
+Given that \( a \) is public and known, we can create a new commitment, \( C_{r_a} \). A Schnorr $\Sigma$-protocol can be used to prove knowledge of the randomness \( r_a \), thus proving $A$ does indeed use the endpoint \(a\). The commitment \( C_{r_a} \) expresses itself as:
+
+\begin{equation}
+C_{r_a} = A - C(a, 0) = g^{r_{a}}.
+\end{equation}
+where \( r_{a} \) is the blinding factor. 
+
+\begin{namedproof}[Proof of a Schnorr $\Sigma$-protocol]
+Select a random value \( \alpha \), where \( \alpha \in \mathbb{Z}^+ \). Compute a challenge value
+\begin{equation}
+c = H(g^{\alpha} | g^{r_{a}}), 
+\end{equation}
+using the Fiat-Shamir heuristic and a public hash function \( H \). Then compute 
+\begin{equation}
+z = \alpha + c \cdot r_{a}
+\end{equation}
+and verify
+\begin{equation}
+g^{z} = g^{\alpha} \cdot C_{r_a}^{c}.
+\end{equation}
+Since 
+\begin{equation}
+g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\alpha} \cdot (g^{r_{a}})^{c} = g^{\alpha} \cdot C_{r_a}^{c},
+\end{equation}
+the proof holds.
+\end{namedproof}
+
+The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr $\Sigma$-protocols, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
+
+\begin{equation}
+\pi = Y | D | \Psi | A | B | W | \Lambda | Z_{a} | g^{r_{a}} | Z_{b} | g^{r_{b}}.
+\end{equation}
+
+\section{Analysis}
+
+This section contains a completeness, soundness, and zero-knowledge analysis of the zkInterval protocol. It will end with a examination of the efficiency and succinctness of the proofs.
+
+The zkInterval protocol is complete if an honest prover can always generate a valid proof when the secret value \( d \) lies between \( a \) and \( b \).
+
+\begin{namedproof}[Proof of Completeness]
+  We begin by reformulating the inequality \(a \geq d \geq b\) in a polynomial form by defining the auxiliary variables
+  \[
+  y = a - d \quad \text{and} \quad w = d - b.
+  \]
+  Then, assuming \(a, b, d \geq 0\) and \(a \geq b\), it follows that \(y, w \geq 0\) and the relation
+  \[
+  a + b + w = y + 2d
+  \]
+  holds.
+  
+  Next, let \( C(v, r) = g^{r} h^{v} \) denote a Pedersen commitment on a value \(v\) with randomness \(r\). We construct commitments so that the underlying arithmetic is preserved homomorphically. In particular, we form the equation
+  \[
+  C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda),
+  \]
+  where the randomness is combined as
+  \[
+  \psi = r_a + r_b + r_w \quad \text{and} \quad \lambda = r_y + 2\,r_d.
+  \]
+  Suppose the prover computes these commitments honestly (i.e., with \(a \geq d \geq b\) so that \(y\) and \(w\) are nonnegative). In that case, the homomorphic properties of the Pedersen commitments ensure that the commitment equation balances exactly, reflecting the original inequality.
+  
+  It is important to note that if the inequality does not hold (that is, if \(y < 0\) or \(w < 0\)), then even though negative values can be reduced modulo the field prime, the resulting representation will not correspond to the intended nonnegative values. This misrepresentation will cause the commitment equation to fail, as the finite field arithmetic will not faithfully capture the intended inequality relationship.
+  
+  We employ the Weil pairing to further validate the arithmetic relation among the committed values. Applying the pairing \(e(\cdot,\cdot)\) to both sides yields
+  \[
+  e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+  \]
+  where \(Q\) is a fixed generator in the \( \mathbb{G}_{2} \) group. The bilinearity, Galois invariance, and identity properties of the Weil pairing ensure that this equation holds if the commitments have been correctly formed according to the intended arithmetic relation.
+  
+  Additionally, Schnorr \(\Sigma\)-protocols are used to prove that the public endpoints \(a\) and \(b\) are correctly embedded in the commitments. Since these protocols are complete, an honest execution yields valid proofs for the endpoints.
+  
+  In summary, the completeness of the overall proof is ensured by:
+  \begin{enumerate}
+      \item The correct polynomial representation of the inequality \(a \geq d \geq b\).
+      \item The homomorphic properties of Pedersen commitments accurately capture the arithmetic relation.
+      \item The Weil pairing, whose properties guarantee that the commitment equation holds when formed correctly.
+      \item The completeness of the Schnorr \(\Sigma\)-protocols that verify the embedding of the endpoints.
+  \end{enumerate}
+  Thus, when \(d\) lies between \(a\) and \(b\) and all steps are executed faithfully, every verification check passes, and the verifier accepts the proof.
+\end{namedproof}
+
+The zkInterval protocol is sound if a dishonest prover can never produce a valid proof that the secret value \( d \) existing outside of \( a \) and \( b \) actually lies between \( a \) and \( b \).
+
+\begin{proof}[Proof of Soundness]
+  Assume that a dishonest prover produces a proof that convinces the verifier that the secret value \( d \) lies in the interval \([b, a]\), while in reality \( d \notin [b, a] \). Without loss of generality, suppose that either \( d < b \) or \( d > a \). Then, at least one of the auxiliary variables
+  \[
+  y = a - d \quad \text{or} \quad w = d - b
+  \]
+  must be negative.
+  
+  In the zkInterval protocol, the prover forms Pedersen commitments to the values \( y \), \( d \), and \( w \) (among others). Due to the binding property of Pedersen commitments, once a commitment \( C(v, r) \) is published, the prover cannot later claim it opens to a different value \( x' \) without breaking the discrete logarithm assumption. Thus, if \( y < 0 \) or \( w < 0 \), the corresponding commitment (e.g. \( C(y, r_y) \) or \( C(w, r_w) \)) would need to represent a negative value. Although negative integers can be reduced modulo the field prime, such a reduction does not yield an opening consistent with the intended nonnegative interpretation of \( y \) and \( w \) in the interval verification.
+  
+  The protocol enforces the arithmetic relation through the homomorphic property of the commitments:
+  \[
+  C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda),
+  \]
+  where the randomness is combined as
+  \[
+  \psi = r_a + r_b + r_w \quad \text{and} \quad \lambda = r_y + 2\,r_d.
+  \]
+  This equation holds if and only if the underlying values satisfy the relation
+  \[
+  a + b + w = y + 2d,
+  \]
+  which in turn is valid only when \( y, w \geq 0 \) (i.e., when \( a \geq d \geq b \)).
+  
+  Additionally, the verifier uses the Weil pairing:
+  \[
+  e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+  \]
+  where \( Q \) is a fixed generator in the \( \mathbb{G}_{2} \) group. The bilinearity, Galois invariance, and identity properties of the Weil pairing guarantee that this equation holds if the commitments are formed as prescribed by the correct arithmetic relation.
+  
+  Finally, the protocol employs Schnorr \(\Sigma\)-protocols to prove that the public endpoints \( a \) and \( b \) are correctly embedded in the commitments. The soundness of these protocols ensures that no prover can fake valid proofs for the endpoints without knowing their correct discrete logarithms.
+  
+  In summary, if \( d \notin [b, a] \), then either \( y \) or \( w \) would be negative, and the corresponding commitments would not properly represent the intended values under finite field arithmetic. As a result, the homomorphic and pairing-based checks would fail, and the verifier would detect the inconsistency. Thus, under the binding property of Pedersen commitments and the soundness of the underlying cryptographic assumptions (including the hardness of the discrete logarithm problem and the correctness of the Schnorr \(\Sigma\)-protocols), a dishonest prover cannot produce a valid proof that \( d \) lies in \([b, a]\) if it does not, except with negligible probability.
+\end{proof}
+
+The zkInterval protocol is zero-knowledge if an honest verifier can only prove the validity of a valid proof without learning the secret value \(d\).
+
+\begin{proof}[Proof of Zero-Knowledge]
+  We show that an honest verifier learns nothing about the secret value \( d \) beyond the fact that it lies in the interval \([b, a]\). This is demonstrated by constructing a simulator that, given only the public values \(a\) and \(b\), produces a transcript indistinguishable from one generated by an honest prover.
+  
+  \textbf{Simulator Construction:}
+  \begin{enumerate}
+      \item \emph{Simulating Pedersen Commitments:}  
+      The simulator chooses random values for the randomness components \(r_a, r_b, r_y, r_d, r_w\) and computes the corresponding Pedersen commitments:
+      \[
+      C(a, r_a), \quad C(b, r_b), \quad C(y, r_y), \quad C(d, r_d), \quad \text{and} \quad C(w, r_w),
+      \]
+      where \(y = a - d\) and \(w = d - b\). Due to the perfect hiding property of Pedersen commitments, these commitments reveal no information about the underlying values. The simulator ensures that the homomorphic relation
+      \[
+      C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)
+      \]
+      holds by appropriately selecting the combined randomness values \(\psi = r_a + r_b + r_w\) and \(\lambda = r_y + 2\,r_d\).
+      
+      \item \emph{Simulating Schnorr \(\Sigma\)-Protocol Transcripts:}  
+      The simulator generates transcripts for the Schnorr \(\Sigma\)-protocols that prove the correct embedding of the public endpoints \(a\) and \(b\) into the commitments. Standard simulation techniques for Schnorr proofs allow the simulator to produce valid-looking responses without knowledge of the discrete logarithms (or the secret \(d\)).
+      
+      \item \emph{Simulating the Pairing Check:}  
+      Finally, the simulator produces values that satisfy the Weil pairing equation
+      \[
+      e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+      \]
+      where \(Q\) is a fixed generator. Given the bilinear and invariant properties of the pairing, any commitments satisfying the homomorphic relation will also satisfy the pairing equation.
+  \end{enumerate}
+  
+  Since the simulated transcript is generated using random values and standard simulation techniques for Schnorr protocols, and because Pedersen commitments are perfectly hiding, the transcript is computationally indistinguishable from one produced by an honest protocol execution. Thus, the verifier gains no knowledge of \( d \) other than the fact that the commitments and pairing check validate the arithmetic relation, which implies that \( d \in [b, a] \).
+  
+  Therefore, the zkInterval protocol is zero-knowledge.
+\end{proof}
+
+Each proof demonstrates that the zkInterval protocol is a zero-knowledge non-interactive proof system.
+
+The zkInterval protocol is succinct. When implemented on the Cardano blockchain, the resulting proof size is 546 bytes for a 64-bit range, smaller than Bulletproofs in 64-bit and 32-bit cases. See Table 4 in \cite{christetal2024}. For the 64-bit case, the average prover time is 90ms and verifier time is 2.23ms. The proof generation is slow because the benchmark is run with Python using the \texttt{py\_ecc} module for the BLS12-381 curve and is not optimized. The proof generation time could be decreased significantly with optimal C bindings via Rust, making it comparable to other protocols. The verification is done with the Aiken VM and represents the upper bound on the real computation time required to verify the proof.
+
+In terms of proof size and verification speed, zkInterval is smaller and faster than what is considered to be industry standard at the time of this writing, e.g., bulletproofs. The zkInterval protocol provides an efficient and succinct zero-knowledge range proof that is practical, transparent, and constant-sized.
+
+\section{Discussion}
+
+This paper introduced zkInterval, a novel constant-size range-proof protocol that is trustless and confidential in a practical way. Our protocol integrates Pedersen commitments, Weil pairings, and Schnorr \(\Sigma\)-protocols to form a robust and efficient proof system. In doing so, zkInterval overcomes several limitations of existing range proofs, most notably the constant proof sizes regardless of the interval length.
+
+A key advantage of zkInterval is its elimination of any trusted setup, which minimizes potential vulnerabilities that arise from setup collusion or parameter compromise. Trustlessness makes it especially attractive for decentralized blockchain applications where trust minimization is critical. Moreover, by relying on well-established cryptographic assumptions (e.g., the hardness of the discrete logarithm problem) and leveraging the perfect hiding property of Pedersen commitments, the protocol ensures that the secret value remains confidential throughout the proof process.
+
+Our analysis confirms that zkInterval satisfies the standard security properties: completeness, soundness, and zero-knowledge. The completeness proof demonstrates that an honest prover can always generate a valid proof when the secret value \(d\) indeed lies within the interval \([b, a]\). The soundness proof ensures that a dishonest prover cannot produce a convincing proof for an invalid claim except with negligible probability. Finally, the zero-knowledge proof shows that an honest verifier learns nothing beyond the claim's validity, ensuring that the secret value is never exposed.
+
+In summary, zkInterval represents a meaningful advancement in the design of range proofs, offering a promising balance between efficiency, security, and practicality. It is a constant-size, non-interacting proof system that will open new avenues for privacy-preserving technologies in decentralized systems.
+
+\section{Bibliography}
+% This sample uses bibtex rather than biblatex.
+\bibliography{references}
+
+% NOTES
+% - Download abbrev3.bib and crypto.bib from https://cryptobib.di.ens.fr/
+% - Use biblio.bib for additional references not in the cryptobib database.
+%   If possible, take them from DBLP.
+
+\end{document}

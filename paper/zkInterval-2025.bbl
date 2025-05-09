@@ -1,0 +1,42 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{CBC{\etalchar{+}}24}
+
+\bibitem[BBB{\etalchar{+}}18]{bunz2018bulletproofs}
+Benedikt B{\"u}nz, Jonathan Bootle, Dan Boneh, Andrew Poelstra, Pieter Wuille,
+  and Greg Maxwell.
+\newblock Bulletproofs: Short proofs for confidential transactions and more.
+\newblock In {\em 2018 IEEE Symposium on Security and Privacy (SP)}, pages
+  315--334. IEEE, 2018.
+
+\bibitem[CBC{\etalchar{+}}24]{christetal2024}
+Miranda Christ, Foteini Baldimtsi, Konstantinos~Kryptos Chalkias, Deepak Maram,
+  Arnab Roy, and Joy Wang.
+\newblock {SoK}: Zero-knowledge range proofs.
+\newblock Cryptology {ePrint} Archive, Paper 2024/430, 2024.
+\newblock URL: \url{https://eprint.iacr.org/2024/430}.
+
+\bibitem[Jed16]{mimblewimble2016}
+Tom~Elvis Jedusor.
+\newblock Mimblewimble.
+\newblock \url{https://scalingbitcoin.org/papers/mimblewimble.txt}, 2016.
+\newblock Unpublished whitepaper.
+
+\bibitem[Men93]{menezes1993}
+Alfred Menezes.
+\newblock {\em Elliptic Curve Public Key Cryptosystems}.
+\newblock Kluwer Academic Publishers, 1993.
+
+\bibitem[Ped91]{pedersen1991}
+Torben~Pryds Pedersen.
+\newblock Non-interactive and information-theoretic secure verifiable secret
+  sharing.
+\newblock In {\em Annual International Cryptology Conference (CRYPTO)}, pages
+  129--140. Springer, 1991.
+
+\bibitem[Tha22]{thaler2022}
+Justin Thaler.
+\newblock {\em Proofs, Arguments, and Zero-Knowledge}, volume~4 of {\em
+  Foundations and Trends{\textregistered} in Privacy and Security}.
+\newblock Now Publishers, 2022.
+
+\end{thebibliography}
