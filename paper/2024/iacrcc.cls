@@ -1,5 +1,5 @@
-\def\fileversion{0.74}
-\def\filedate{2024/12/09}
+\def\fileversion{0.71}
+\def\filedate{2024/07/08}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \typeout{^^J  ***  LaTeX class for IACR Communications in Cryptology v\fileversion\space ***^^J}
@@ -870,7 +870,6 @@
     }{}
   \fi
   \if\relax\expandafter\detokenize\expandafter{\@IACR@title@subtitle}\relax\else
-    \expandafter\checkstring\expandafter{\@IACR@title@subtitle}{subtitle argument to title must be plain text}%
     \gdef\@IACR@title@subtitle@defined{}%
   \fi
 }
@@ -1277,12 +1276,46 @@
   \restylefloat{figure}
 \fi
 
+% Line # for submission
+\newcommand\linenomathWithnumbersforAMS{%
+  \ifLineNumbers
+    \ifnum\interlinepenalty>-\linenopenaltypar
+      \global\holdinginserts\thr@@
+      \advance\interlinepenalty \linenopenalty
+      \ifhmode                                   % v4.3
+        \advance\predisplaypenalty \linenopenalty
+      \fi
+      \advance\interdisplaylinepenalty \linenopenalty
+    \fi
+  \fi
+  \ignorespaces
+}
+
 \newcommand\IACR@linenumbers{%
   % lineno: line numbers on paragraphs
-  \RequirePackage[mathlines,sep=11pt,width=11pt]{lineno}
-  \AtBeginDocument{%
-    \linenumbers%
+  \RequirePackage[mathlines]{lineno}
+  \def\linenumberfont{\normalfont\tiny\sffamily\color{gray}}
+  % Taken from http://phaseportrait.blogspot.fr/2007/08/lineno-and-amsmath-compatibility.html
+  \newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+    \expandafter\let\csname old##1\expandafter\endcsname\csname ##1\endcsname
+    \expandafter\let\csname oldend##1\expandafter\endcsname\csname end##1\endcsname
+    \renewenvironment{##1}%
+    {\linenomathWithnumbersforAMS\csname old##1\endcsname}%
+    {\csname oldend##1\endcsname\endlinenomath}%
   }%
+  \newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+    \patchAmsMathEnvironmentForLineno{##1}%
+    \patchAmsMathEnvironmentForLineno{##1*}%
+  }%
+  \AtBeginDocument{%
+    \linenumbers
+    \patchAmsMathEnvironmentForLineno{equation*}%
+    \patchBothAmsMathEnvironmentsForLineno{align}%
+    \patchBothAmsMathEnvironmentsForLineno{flalign}%
+    \patchBothAmsMathEnvironmentsForLineno{alignat}%
+    \patchBothAmsMathEnvironmentsForLineno{gather}%
+    \patchBothAmsMathEnvironmentsForLineno{multline}%
+  }
 }
 \ifcsstring{@IACRversion}{submission}{\IACR@linenumbers}{}
 \ifcsstring{@IACRversion}{final}{%

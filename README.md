@@ -58,3 +58,9 @@ Estimate cost is about 166,308 Lovelace to compute on-chain.
 
 [The Paper](paper/zkInterval-2024.pdf) describing the derivation of zkInterval.
 
+```bash
+pdflatex zkInterval-2025.tex
+bibtex zkInterval-2025
+pdflatex zkInterval-2025.tex
+pdflatex zkInterval-2025.tex
+```

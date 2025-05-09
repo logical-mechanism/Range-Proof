@@ -1,0 +1,149 @@
+% IACR Communications in Cryptology template file
+% This file shows how to use the iacrcc class to write a paper.
+
+%% Document mode
+% [version=xxx] where xxx is preprint, submission, or final. The default is preprint.
+%               version=submission puts line numbers into the document and makes it
+%               anonymous (which can be overridden).
+%               version=final is for submitting the final version. This requires a license
+%               to be specified.
+% [notanonymous]  Keep author names in submission mode
+%% Package options
+% [floatrow]      Load floatrow package with correct captions
+% [biblatex]      Use the biblatex package instead of bibtex. Note that options
+%                 may not be passed to biblatex at this time.
+
+% Uncomment the next line if you have TeX Live 2021 or later
+% and want to produce a PDF which complies with the PDF/A-2U standard
+% \DocumentMetadata{pdfstandard=a-2u}
+\documentclass{iacrcc}
+
+% When the *final* document mode is used
+% the authors need to provide a supported license.
+% In all other modes this information is ignored.
+% The currently provided ones are { CC-by }
+\license{CC-by}
+
+% Include LaTeX packages required by your paper
+% \usepackage{}
+
+% Provide the title of the paper
+% This should look like:
+\title[running  = {zkInterval},
+      ]{zkInterval: Trustless, Confidential, Constant-Size Range Proofs}
+% Where the options in square brackets “[ ]” are optional and control the following:
+% running:   the running title displayed in the headers
+% subtitle:  provide a subtitle
+% plaintext: a text version of the title (mandatory if macros are used in the title)
+
+% Define authors and affiliations
+% Authors are listed individually using the \addauthor tag followed by a list of affiliations.
+% The idea is that every author makes a separate call to this command.
+% This should look like:
+% \addauthor[inst      = {1,2},
+%            orcid     = 0000-0000-0000-0000,
+%            footnote  = {Thanks to my supervisor for the support.},
+%            onclick   = {https://www.mypersonalwebpage.com}
+%           ]{Alice Accomplished}
+% Where the options in square brackets “[ ]” are optional 
+% and control the following:
+% inst:     a numerical list pointing to the index of the institution 
+%           in the affiliation array.
+% orcid:    create a small clickable orcid logo next to the authors name 
+%           linking to the authors ORCID iD see: orcid.org.
+% footnote: create an author-specific footnote.
+% surname:  indicate the surname of the author for indexing purposes.
+% onclick:  define what to do when clicking on the external link logo
+%           next to the author name: e.g., can point to the academic webpage.
+% email:    define the e-mail address of this author.
+\addauthor[inst    = {1},
+           onclick = {https://www.logicalmechanism.io/},
+           email   = {quinn@logicalmechanism.io},
+           surname = {Parkinson}
+          ]{Quinn Parkinson}
+
+% The following command controls the running header for authors
+% This is optional for <= 4 authors and mandatory for > 4 authors
+% \authorrunning{Joppe W. Bos and Kevin S. McCurley}
+
+% Affiliations are listed individually using the \addaffiliation command 
+% *after* the (list of) authors using \addauthor
+% This should look like (full example):
+% \addaffiliation[ror        = 05f950310,
+%                 department = {Computer Security and Industrial Cryptography},              
+%                 street     = {Kasteelpark Arenberg 10, box 2452},
+%                 city       = {Leuven},
+%                 state      = {Vlaams-Brabant},
+%                 postcode   = {3001},
+%                 country    = {Belgium}
+%                ]{KU Leuven}
+% Where the options in square brackets “[ ]” are optional and control 
+% the following (optional information is mainly used for meta-data collection):
+% ror:        provide the Research Organization Registry (ROR) identifier 
+%             for this affiliation (see: ror.org). This is used for meta-data 
+%             collection only.
+% department: department or suborganization name
+% street:     street address
+% city:       city name
+% state:      state or province name
+% postcode:   zip or postal code
+% country:    country name. Required for [version=final]
+\addaffiliation[ country = {USA}
+               ]{Logical Mechanism LLC}
+
+% Authors should use the \addfunding macro to make sure that funding agencies
+% can find papers published under their sponsorship.
+% You can use the online tool at
+% https://publish.iacr.org/funding
+% to help you find fundref and ror identifiers.
+% Note that \addfunding *does not* automatically create footnotes or
+% an acknowledgements section to identify funding - it only collects the
+% metadata for indexing.
+% An example is:
+
+% \addfunding[country  = {europe},
+%             grantid  = {1234},
+%             fundref = {100010661}
+%            ]{Horizon 2020 Framework Programme}
+
+% A footnote can be placed on the front page without a symbol / numbering using:
+%\genericfootnote{This is the full version of our paper published at XX}
+
+\begin{document}
+
+\maketitle
+
+% Provide the abstract of your paper
+\begin{abstract}
+  In this paper, we introduce zkInterval, a novel constant-size range proof protocol that proves a secret value lies within a public interval without revealing the value or requiring a trusted setup. Leveraging Pedersen commitments, Weil pairings, and Schnorr $\Sigma$-protocols, zkInterval offers a practical, trustless, and confidential solution with proofs whose size remains invariant regardless of the interval's range. These properties significantly reduce complexity, storage, and communication overhead, making zkInterval particularly well-suited for privacy-focused applications and scenarios with variable interval lengths. Our protocol enhances the efficiency and scalability of cryptographic range proofs, offering a robust solution to a critical challenge in modern cryptography.
+\end{abstract}
+
+% A separate text-only abstract must be supplied in your final version.
+% This will be used for web pages and indexing and should not contain macros.
+\begin{textabstract}
+\end{textabstract}
+
+% The content of the paper starts here
+\section{Introduction}
+
+Proving that a value lies within a specific interval while preserving its confidentiality practically and efficiently poses a significant challenge in modern cryptographic range proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency, especially in applications that demand a constant proof size across variable interval lengths or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing a practical, trustless, and constant-size range proof independent of the interval's range. By integrating Weil pairings \cite[pp.62--63]{menezes1993}, Pedersen commitments \cite{pedersen1991}, and Schnorr $\Sigma$-protocols \cite[pp.310--311]{thaler2022}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, zkInterval addresses a significant need in modern cryptographic systems.
+
+Although some schemes offer constant-size proofs, they often rely on trusted setups or result in verbose proofs \cite{cryptoeprint:2024/430}. More recent advancements like Bulletproofs \cite{bunz2018bulletproofs} have reduced proof sizes to sublinear scales, all while being trustless; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
+
+The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
+
+\section{Bibliography}
+Citing papers is done in the usual way using BibTeX or \texttt{biblatex}
+commands. For example: the RSA paper~\cite{RSA78}.
+
+It is highly encouraged to use CryptoBib from \url{https://cryptobib.di.ens.fr}
+
+% This sample uses bibtex rather than biblatex.
+\bibliography{references}
+
+% NOTES
+% - Download abbrev3.bib and crypto.bib from https://cryptobib.di.ens.fr/
+% - Use biblio.bib for additional references not in the cryptobib database.
+%   If possible, take them from DBLP.
+
+\end{document}
