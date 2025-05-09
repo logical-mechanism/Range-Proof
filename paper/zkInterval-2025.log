@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 21:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  8 MAY 2025 22:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1394,7 +1394,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 121.
 \openout5 = `zkInterval-2025.abstract'.
 
-<doclicense-CC-by-88x31.pdf, id=32, 90.3375pt x 31.61812pt>
+<doclicense-CC-by-88x31.pdf, id=40, 90.3375pt x 31.61812pt>
 File: doclicense-CC-by-88x31.pdf Graphic file (type pdf)
 <use doclicense-CC-by-88x31.pdf>
 Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 137.
@@ -1414,42 +1414,59 @@ iacrcc:opened as ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as ts1lmr.fd
- [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}]
+ [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}] [5{/usr/share/texmf/fonts/
+enc/dvips/lm/lm-mathex.enc}] [6]
+Overfull \hbox (0.16411pt too wide) in paragraph at lines 432--433
+[]\T1/lmr/m/n/10 (-20) The zk-In-ter-val pro-to-col is fairly suc-cinct. When i
+m-ple-mented on the Car-dano blockchain,
+ []
+
+[7]
+
+LaTeX Warning: Reference `bp' on page 8 undefined on input line 438.
+
+
+LaTeX Warning: Reference `c' on page 8 undefined on input line 440.
+
 iacrcc:opened as zkInterval-2025.bbl
- (./zkInterval-2025.bbl)
+(./zkInterval-2025.bbl [8])
 iacrcc:closed as zkInterval-2025.bbl
- [5] (./zkInterval-2025.aux)
+ [9] (./zkInterval-2025.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `zkInterval-2025.out' has not changed.
-(rerunfilecheck)             Checksum: A20B7C5A5A65E995537FADC4E6820C78;389.
+(rerunfilecheck)             Checksum: CA9E9D4A01D012097C21F2B128179FBE;563.
  ) 
 Here is how much of TeX's memory you used:
- 27602 strings out of 474222
- 505656 string characters out of 5748733
+ 27685 strings out of 474222
+ 506590 string characters out of 5748733
  1941975 words of memory out of 5000000
- 49113 multiletter control sequences out of 15000+600000
- 633557 words of font info for 164 fonts, out of 8000000 for 9000
+ 49127 multiletter control sequences out of 15000+600000
+ 641722 words of font info for 192 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,14n,121p,1404b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share
-/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fon
-ts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
-</usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
-mbols/msbm10.pfb>
-Output written on zkInterval-2025.pdf (5 pages, 339735 bytes).
+pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/p
+ublic/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/shar
+e/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm
+/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb>
+</usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on zkInterval-2025.pdf (9 pages, 364515 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
- 183 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 46130 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 221 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 50242 words of extra memory for PDF output out of 51595 (max. 10000000)
 

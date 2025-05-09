@@ -8,7 +8,7 @@ Benedikt B{\"u}nz, Jonathan Bootle, Dan Boneh, Andrew Poelstra, Pieter Wuille,
 \newblock In {\em 2018 IEEE Symposium on Security and Privacy (SP)}, pages
   315--334. IEEE, 2018.
 
-\bibitem[CBC{\etalchar{+}}24]{cryptoeprint:2024/430}
+\bibitem[CBC{\etalchar{+}}24]{christetal2024}
 Miranda Christ, Foteini Baldimtsi, Konstantinos~Kryptos Chalkias, Deepak Maram,
   Arnab Roy, and Joy Wang.
 \newblock {SoK}: Zero-knowledge range proofs.

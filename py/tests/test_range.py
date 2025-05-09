@@ -245,6 +245,12 @@ def test_proof_generation2():
     print(f"Approximately: {len(combined_string) // 2} Bytes")
     assert Range.verify_proof(proof, lower, upper)
 
+def test_proof_generation3():
+    lower = 0
+    upper = pow(2, 64) - 1
+    age = randrange(lower, upper)
+    r = Range(secret_value=age, lower_bound=lower, upper_bound=upper)
+    r.generate_proof()
 
 if __name__ == "__main__":
     pytest.main()

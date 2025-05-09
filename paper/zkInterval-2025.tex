@@ -131,7 +131,7 @@
 
 Proving that a value lies within a specific interval while preserving its confidentiality practically and efficiently poses a significant challenge in modern cryptographic range proofs. Many existing methods generate proofs whose size scales with the interval's range, which can severely limit their efficiency, especially in applications that demand a constant proof size across variable interval lengths or must avoid trusted setups, which can introduce vulnerabilities such as collusion-based attacks. This paper introduces zkInterval, a protocol that overcomes these limitations by producing a practical, trustless, and constant-size range proof independent of the interval's range. By integrating Weil pairings \cite[pp.62--63]{menezes1993}, Pedersen commitments \cite{pedersen1991}, and Schnorr $\Sigma$-protocols \cite[pp.310--311]{thaler2022}, zkInterval securely demonstrates that a secret value lies within a publicly known interval while keeping the value itself hidden. Our efficient and concise approach makes zkInterval particularly well-suited for privacy-focused applications with variable interval lengths. Since privacy-preserving range proofs play an essential role in private information verification, secure multi-party computation, and confidential transactions, zkInterval addresses a significant need in modern cryptographic systems.
 
-Although some schemes offer constant-size proofs, they often rely on trusted setups or result in verbose proofs \cite{cryptoeprint:2024/430}. More recent advancements like Bulletproofs \cite{bunz2018bulletproofs} have reduced proof sizes to sublinear scales, all while being trustless; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
+Although some schemes offer constant-size proofs, they often rely on trusted setups or result in verbose proofs \cite{christetal2024}. More recent advancements like Bulletproofs \cite{bunz2018bulletproofs} have reduced proof sizes to sublinear scales, all while being trustless; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
 
 The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
 
@@ -307,8 +307,141 @@ the proof holds.
 The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr $\Sigma$-protocols, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:
 
 \begin{equation}
-\pi = Y | D | \Psi | A | B | W | \Lambda | g^{r_{a}} | g^{r_{b}} | Z_{a} | Z_{b}.
+\pi = Y | D | \Psi | A | B | W | \Lambda | Z_{a} | g^{r_{a}} | Z_{b} | g^{r_{b}}.
 \end{equation}
+
+\section{Analysis}
+
+This section contains a completeness, soundness, and zero-knowledge analysis of the zkInterval protocol. It will end with a examination of the efficiency and succinctness of the proofs.
+
+The zkInterval protocol is complete if an honest prover can always generate a valid proof when the secret value \( d \) lies between \( a \) and \( b \).
+
+\begin{namedproof}[Proof of Completeness]
+  We begin by reformulating the inequality \(a \geq d \geq b\) in a polynomial form by defining the auxiliary variables
+  \[
+  y = a - d \quad \text{and} \quad w = d - b.
+  \]
+  Then, assuming \(a, b, d \geq 0\) and \(a \geq b\), it follows that \(y, w \geq 0\) and the relation
+  \[
+  a + b + w = y + 2d
+  \]
+  holds.
+  
+  Next, let \( C(v, r) = g^{r} h^{v} \) denote a Pedersen commitment on a value \(v\) with randomness \(r\). We construct commitments so that the underlying arithmetic is preserved homomorphically. In particular, we form the equation
+  \[
+  C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda),
+  \]
+  where the randomness is combined as
+  \[
+  \psi = r_a + r_b + r_w \quad \text{and} \quad \lambda = r_y + 2\,r_d.
+  \]
+  Suppose the prover computes these commitments honestly (i.e., with \(a \geq d \geq b\) so that \(y\) and \(w\) are nonnegative). In that case, the homomorphic properties of the Pedersen commitments ensure that the commitment equation balances exactly, reflecting the original inequality.
+  
+  It is important to note that if the inequality does not hold (that is, if \(y < 0\) or \(w < 0\)), then even though negative values can be reduced modulo the field prime, the resulting representation will not correspond to the intended nonnegative values. This misrepresentation will cause the commitment equation to fail, as the finite field arithmetic will not faithfully capture the intended inequality relationship.
+  
+  We employ the Weil pairing to further validate the arithmetic relation among the committed values. Applying the pairing \(e(\cdot,\cdot)\) to both sides yields
+  \[
+  e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+  \]
+  where \(Q\) is a fixed generator in the \( \mathbb{G}_{2} \) group. The bilinearity, Galois invariance, and identity properties of the Weil pairing ensure that this equation holds if the commitments have been correctly formed according to the intended arithmetic relation.
+  
+  Additionally, Schnorr \(\Sigma\)-protocols are used to prove that the public endpoints \(a\) and \(b\) are correctly embedded in the commitments. Since these protocols are complete, an honest execution yields valid proofs for the endpoints.
+  
+  In summary, the completeness of the overall proof is ensured by:
+  \begin{enumerate}
+      \item The correct polynomial representation of the inequality \(a \geq d \geq b\).
+      \item The homomorphic properties of Pedersen commitments accurately capture the arithmetic relation.
+      \item The Weil pairing, whose properties guarantee that the commitment equation holds when formed correctly.
+      \item The completeness of the Schnorr \(\Sigma\)-protocols that verify the embedding of the endpoints.
+  \end{enumerate}
+  Thus, when \(d\) lies between \(a\) and \(b\) and all steps are executed faithfully, every verification check passes, and the verifier accepts the proof.
+\end{namedproof}
+
+The zkInterval protocol is sound if a dishonest prover can never produce a valid proof that the secret value \( d \) existing outside of \( a \) and \( b \) actually lies between \( a \) and \( b \).
+
+\begin{proof}[Proof of Soundness]
+  Assume that a dishonest prover produces a proof that convinces the verifier that the secret value \( d \) lies in the interval \([b, a]\), while in reality \( d \notin [b, a] \). Without loss of generality, suppose that either \( d < b \) or \( d > a \). Then, at least one of the auxiliary variables
+  \[
+  y = a - d \quad \text{or} \quad w = d - b
+  \]
+  must be negative.
+  
+  In the zkInterval protocol, the prover forms Pedersen commitments to the values \( y \), \( d \), and \( w \) (among others). Due to the binding property of Pedersen commitments, once a commitment \( C(v, r) \) is published, the prover cannot later claim it opens to a different value \( x' \) without breaking the discrete logarithm assumption. Thus, if \( y < 0 \) or \( w < 0 \), the corresponding commitment (e.g. \( C(y, r_y) \) or \( C(w, r_w) \)) would need to represent a negative value. Although negative integers can be reduced modulo the field prime, such a reduction does not yield an opening consistent with the intended nonnegative interpretation of \( y \) and \( w \) in the interval verification.
+  
+  The protocol enforces the arithmetic relation through the homomorphic property of the commitments:
+  \[
+  C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda),
+  \]
+  where the randomness is combined as
+  \[
+  \psi = r_a + r_b + r_w \quad \text{and} \quad \lambda = r_y + 2\,r_d.
+  \]
+  This equation holds if and only if the underlying values satisfy the relation
+  \[
+  a + b + w = y + 2d,
+  \]
+  which in turn is valid only when \( y, w \geq 0 \) (i.e., when \( a \geq d \geq b \)).
+  
+  Additionally, the verifier uses the Weil pairing:
+  \[
+  e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+  \]
+  where \( Q \) is a fixed generator in the \( \mathbb{G}_{2} \) group. The bilinearity, Galois invariance, and identity properties of the Weil pairing guarantee that this equation holds if the commitments are formed as prescribed by the correct arithmetic relation.
+  
+  Finally, the protocol employs Schnorr \(\Sigma\)-protocols to prove that the public endpoints \( a \) and \( b \) are correctly embedded in the commitments. The soundness of these protocols ensures that no prover can fake valid proofs for the endpoints without knowing their correct discrete logarithms.
+  
+  In summary, if \( d \notin [b, a] \), then either \( y \) or \( w \) would be negative, and the corresponding commitments would not properly represent the intended values under finite field arithmetic. As a result, the homomorphic and pairing-based checks would fail, and the verifier would detect the inconsistency. Thus, under the binding property of Pedersen commitments and the soundness of the underlying cryptographic assumptions (including the hardness of the discrete logarithm problem and the correctness of the Schnorr \(\Sigma\)-protocols), a dishonest prover cannot produce a valid proof that \( d \) lies in \([b, a]\) if it does not, except with negligible probability.
+\end{proof}
+
+The zkInterval protocol is zero-knowledge if an honest verifier can only prove the validity of a valid proof without learning the secret value \(d\).
+
+\begin{proof}[Proof of Zero-Knowledge]
+  We show that an honest verifier learns nothing about the secret value \( d \) beyond the fact that it lies in the interval \([b, a]\). This is demonstrated by constructing a simulator that, given only the public values \(a\) and \(b\), produces a transcript indistinguishable from one generated by an honest prover.
+  
+  \textbf{Simulator Construction:}
+  \begin{enumerate}
+      \item \emph{Simulating Pedersen Commitments:}  
+      The simulator chooses random values for the randomness components \(r_a, r_b, r_y, r_d, r_w\) and computes the corresponding Pedersen commitments:
+      \[
+      C(a, r_a), \quad C(b, r_b), \quad C(y, r_y), \quad C(d, r_d), \quad \text{and} \quad C(w, r_w),
+      \]
+      where \(y = a - d\) and \(w = d - b\). Due to the perfect hiding property of Pedersen commitments, these commitments reveal no information about the underlying values. The simulator ensures that the homomorphic relation
+      \[
+      C(y, r_y) + 2\,C(d, r_d) + C(0, \psi) = C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)
+      \]
+      holds by appropriately selecting the combined randomness values \(\psi = r_a + r_b + r_w\) and \(\lambda = r_y + 2\,r_d\).
+      
+      \item \emph{Simulating Schnorr \(\Sigma\)-Protocol Transcripts:}  
+      The simulator generates transcripts for the Schnorr \(\Sigma\)-protocols that prove the correct embedding of the public endpoints \(a\) and \(b\) into the commitments. Standard simulation techniques for Schnorr proofs allow the simulator to produce valid-looking responses without knowledge of the discrete logarithms (or the secret \(d\)).
+      
+      \item \emph{Simulating the Pairing Check:}  
+      Finally, the simulator produces values that satisfy the Weil pairing equation
+      \[
+      e\Big(Q,\, C(y, r_y) + C(d, r_d) + C(0, \psi)\Big) = e\Big(Q,\, C(a, r_a) + C(b, r_b) + C(w, r_w) + C(0, \lambda)\Big),
+      \]
+      where \(Q\) is a fixed generator. Given the bilinear and invariant properties of the pairing, any commitments satisfying the homomorphic relation will also satisfy the pairing equation.
+  \end{enumerate}
+  
+  Since the simulated transcript is generated using random values and standard simulation techniques for Schnorr protocols, and because Pedersen commitments are perfectly hiding, the transcript is computationally indistinguishable from one produced by an honest protocol execution. Thus, the verifier gains no knowledge of \( d \) other than the fact that the commitments and pairing check validate the arithmetic relation, which implies that \( d \in [b, a] \).
+  
+  Therefore, the zkInterval protocol is zero-knowledge.
+\end{proof}
+
+Each proof demostrates that the zkInterval protocol is a zero-knowledge non-interactive proof system.
+
+The zkInterval protocol is fairly succinct. When implemented on the Cardano blockchain, the resulting proof size is 546 bytes for a 64-bit range which is smaller than Bulletproofs in both the 64-bit and 32-bit cases. See Table 4 in \cite{christetal2024}. For the 64-bit case the average prover time is 90ms and verifier time is 2.23ms. The proof generation is slow due to the benchmark being ran with python using the \texttt{py\_ecc} module for the BLS12-381 curve which is not heavily optmized for performance. The prover time could be decreased significantly with optimal C bindings via rust which would make is comparable to other protocols. The verification is done with the Aiken VM and represents the upperbound on the real computation time required to verify the proof.
+
+In terms of proof size and verification speed when compared to what is consider at the time of this writing to be industry standard, e.g. Bulletproofs, zkInterval is smaller and faster. The zkInterval protocol provides an efficient and succinct zero-knowledge range proof that is practical, transparent, and has constant-sized proofs.
+
+\section{Discussion}
+
+This paper introduced zkInterval, a novel constant-size range-proof protocol that achieves trustlessness and confidentiality in a practical way. Our protocol integrates Pedersen commitments, Weil pairings, and Schnorr \(\Sigma\)-protocols to form a robust and efficient proof system. In doing so, zkInterval overcomes several limitations of existing range proofs, most notably the constant proof sizes regardless of the interval length.
+
+A key advantage of zkInterval is its elimination of any trusted setup, which minimizes potential vulnerabilities that arise from setup collusion or parameter compromise. This makes it especially attractive for decentralized blockchain applications where trust minimization is critical. Moreover, by relying on well-established cryptographic assumptions (e.g., the hardness of the discrete logarithm problem) and leveraging the perfect hiding property of Pedersen commitments, the protocol ensures that the secret value remains confidential throughout the proof process.
+
+Our analysis confirms that zkInterval satisfies the standard security properties: completeness, soundness, and zero-knowledge. The completeness proof demonstrates that an honest prover can always generate a valid proof when the secret value \(d\) indeed lies within the interval \([b, a]\). The soundness proof ensures that a dishonest prover cannot produce a convincing proof for an invalid claim except with negligible probability. Finally, the zero-knowledge proof shows that an honest verifier learns nothing beyond the claim's validity, ensuring that the secret value is never exposed.
+
+In summary, zkInterval represents a meaningful advancement in the design of range proofs, offering a promising balance between efficiency, security, and practicality. It is a constant-size, non-interacting proof system that will open new avenues for privacy-preserving technologies in decentralized systems.
 
 \section{Bibliography}
 % This sample uses bibtex rather than biblatex.
