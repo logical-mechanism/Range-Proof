@@ -1,4 +1,5 @@
-use blstrs::{G1Affine, G2Affine, G1Projective, G2Projective};
+use blstrs::{G1Affine, G1Projective, G2Affine, G2Projective, Scalar};
+use group::Curve;
 
 /// g^1 (in G1)
 pub const G_BYTES: [u8; 48] = hex_literal::hex!(
@@ -35,4 +36,10 @@ pub fn decompress(hex_str: &str) -> G1Projective {
     buf.copy_from_slice(&bytes[..48]); // assumes the input is exactly 48 bytes
     let affine: G1Affine = G1Affine::from_compressed(&buf).unwrap(); // CtOption<Option<T>>
     affine.into()
+}
+
+pub fn sk_to_g1(generator: &str, sk: Scalar) -> String {
+    let point = decompress(generator) * sk;
+    let compressed = point.to_affine().to_compressed();
+    hex::encode(compressed)
 }
