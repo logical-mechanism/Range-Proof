@@ -1,5 +1,5 @@
 # Cargo build output
-/target/
+target/
 
 # Binaries and other output
 *.rs.bk
