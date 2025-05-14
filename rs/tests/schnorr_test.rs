@@ -1,3 +1,4 @@
+use blstrs::Scalar;
 use rs::schnorr::{fiat_shamir_heuristic, create_proof, random_scalar, prove};
 use rs::constants::sk_to_g1;
 
@@ -19,6 +20,15 @@ fn test_real_fiat_shamir_heuristic() {
 fn valid_schnorr_proof() {
     let generator = "97F1D3A73197D7942695638C4FA9AC0FC3688C4F9774B905A14E3A3F171BAC586C55E83FF97A1AEFFB3AF00ADB22C6BB";
     let sk = random_scalar();
+    let public_value = sk_to_g1(generator, sk);
+    let (z_b, g_r_b) = create_proof(generator.to_string(), public_value.clone(), sk);
+    assert!(prove(generator, &public_value, &z_b, &g_r_b))
+}
+
+#[test]
+fn valid_endpoint_proof() {
+    let generator = "97F1D3A73197D7942695638C4FA9AC0FC3688C4F9774B905A14E3A3F171BAC586C55E83FF97A1AEFFB3AF00ADB22C6BB";
+    let sk = Scalar::from(0u64);
     let public_value = sk_to_g1(generator, sk);
     let (z_b, g_r_b) = create_proof(generator.to_string(), public_value.clone(), sk);
     assert!(prove(generator, &public_value, &z_b, &g_r_b))
