@@ -15,4 +15,8 @@ hex-literal = "1.0.0"
 rand_core = { version = "0.6.0", features = ["std"] }
 
 [dev-dependencies]
-criterion = "0.5.1"
+criterion = "0.6.0"
+
+[[bench]]
+name = "zk_interval"
+harness = false

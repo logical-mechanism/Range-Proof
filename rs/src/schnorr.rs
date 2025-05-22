@@ -1,4 +1,4 @@
-use crate::{hashing::blake2b_224};
+use crate::hashing::blake2b_224;
 use blstrs::{G1Affine, G1Projective, Scalar};
 
 use ff::Field;
@@ -40,7 +40,11 @@ pub fn random_scalar() -> Scalar {
     Scalar::random(&mut OsRng)
 }
 
-pub fn create_proof(generator: String, public_value: String, sk: Scalar) -> (String, String) {
+pub fn create_schnorr_proof(
+    generator: String,
+    public_value: String,
+    sk: Scalar,
+) -> (String, String) {
     let r: Scalar = random_scalar();
     let g1: G1Affine = G1Affine::from_compressed(
         &hex::decode(&generator)
@@ -52,11 +56,8 @@ pub fn create_proof(generator: String, public_value: String, sk: Scalar) -> (Str
 
     let g_r: G1Projective = G1Projective::from(g1) * r;
 
-    let c_hex: String = fiat_shamir_heuristic(
-        generator,
-        hex::encode(g_r.to_compressed()),
-        public_value,
-    );
+    let c_hex: String =
+        fiat_shamir_heuristic(generator, hex::encode(g_r.to_compressed()), public_value);
     let c_bytes: Vec<u8> = hex::decode(&c_hex).expect("Failed to decode Fiat-Shamir output");
     let mut c_array: [u8; 32] = [0u8; 32];
     c_array[(32 - c_bytes.len())..].copy_from_slice(&c_bytes);
@@ -70,7 +71,7 @@ pub fn create_proof(generator: String, public_value: String, sk: Scalar) -> (Str
 }
 
 /// Used for testing
-pub fn prove(generator: &str, public_value: &str, z_b: &str, g_r_b: &str) -> bool {
+pub fn prove_schnorr(generator: &str, public_value: &str, z_b: &str, g_r_b: &str) -> bool {
     // Decode and decompress generator
     let g1: G1Affine = G1Affine::from_compressed(
         &hex::decode(generator)

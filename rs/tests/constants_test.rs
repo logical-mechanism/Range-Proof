@@ -1,5 +1,5 @@
-use rs::constants::*;
 use blstrs::{G1Projective, G2Projective, Scalar};
+use rs::constants::*;
 
 #[test]
 fn create_g() {
@@ -14,7 +14,6 @@ fn add_g_to_g() {
     let h_proj: G1Projective = h();
     assert_eq!(g_proj + g_proj, h_proj);
 }
-
 
 #[test]
 fn create_h_from_g() {
