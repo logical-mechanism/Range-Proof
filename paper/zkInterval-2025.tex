@@ -429,7 +429,7 @@ The zkInterval protocol is zero-knowledge if an honest verifier can only prove t
 
 Each proof demonstrates that the zkInterval protocol is a zero-knowledge non-interactive proof system.
 
-The zkInterval protocol is succinct. When implemented on the Cardano blockchain, the resulting proof size is 546 bytes for a 64-bit range, smaller than Bulletproofs in 64-bit and 32-bit cases. See Table 4 in \cite{christetal2024}. For the 64-bit case, the average prover time is 90ms and verifier time is 2.23ms. The proof generation is slow because the benchmark is run with Python using the \texttt{py\_ecc} module for the BLS12-381 curve and is not optimized. The proof generation time could be decreased significantly with optimal C bindings via Rust, making it comparable to other protocols. The verification is done with the Aiken VM and represents the upper bound on the real computation time required to verify the proof.
+The zkInterval protocol is succinct. When implemented on the Cardano blockchain, the resulting proof size is 546 bytes for a 64-bit range, smaller than Bulletproofs in 64-bit and 32-bit cases. See Table 4 in \cite{christetal2024}. For the 64-bit case, the average prover time is 2.3ms and verifier time is 1.58ms. The proof generation is done with Rust using blstrs.
 
 In terms of proof size and verification speed, zkInterval is smaller and faster than what is considered to be industry standard at the time of this writing, e.g., bulletproofs. The zkInterval protocol provides an efficient and succinct zero-knowledge range proof that is practical, transparent, and constant-sized.
 
