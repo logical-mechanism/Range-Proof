@@ -1,0 +1,32 @@
+# Cargo build output
+target/
+
+# Binaries and other output
+*.rs.bk
+*.exe
+*.out
+*.o
+*.so
+*.dylib
+*.dll
+
+# IDE/editor settings
+**/*.swp
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# By default, ignore lock file if this is a lib crate
+# Uncomment if you want to commit Cargo.lock for binaries
+# Cargo.lock
+
+# Optional: ignore test coverage output
+/coverage/
+
+# Optional: ignore benchmarking data
+/criterion/
+
+# Optional: ignore rustfmt and clippy artifacts
+/rustfmt.toml
+/clippy.toml
