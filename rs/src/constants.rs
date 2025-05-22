@@ -33,8 +33,8 @@ pub fn q() -> G2Projective {
 pub fn decompress(hex_str: &str) -> G1Projective {
     let bytes: Vec<u8> = hex::decode(hex_str).expect("invalid hex");
     let mut buf: [u8; 48] = [0u8; 48];
-    buf.copy_from_slice(&bytes[..48]); // assumes the input is exactly 48 bytes
-    let affine: G1Affine = G1Affine::from_compressed(&buf).unwrap(); // CtOption<Option<T>>
+    buf.copy_from_slice(&bytes[..48]);
+    let affine: G1Affine = G1Affine::from_compressed(&buf).unwrap();
     affine.into()
 }
 
