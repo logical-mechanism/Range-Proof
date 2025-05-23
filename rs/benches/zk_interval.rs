@@ -1,9 +1,5 @@
 // benches/zk_interval.rs
 //
-// max range
-// prover time: 2.301 milliseconds
-// verifier time: 1.528 milliseconds
-//
 // 64-bit
 // prover time: 2.201 milliseconds
 // verifier time: 1.5497 milliseconds
@@ -11,19 +7,20 @@
 
 use blstrs::Scalar;
 use criterion::{Criterion, criterion_group, criterion_main};
-use ff::Field;
+// use ff::Field;
 use rs::constants::sk_to_g1;
 use rs::range::{create_range_proof, prove_range};
-use rs::schnorr::{create_schnorr_proof, prove_schnorr, random_scalar};
+use rs::schnorr::{create_schnorr_proof, prove_schnorr};
+// use rs::schnorr::random_scalar;
 
 fn bench_all(c: &mut Criterion) {
     // common inputs
     let generator = "97F1D3A73197D7942695638C4FA9AC0FC3688C4F9774B905A14E3A3F171BAC586C55E83FF97A1AEFFB3AF00ADB22C6BB";
-    let a: Scalar = -Scalar::ONE;
-    // let a: Scalar = Scalar::from(18446744073709551615);
+    // let a: Scalar = -Scalar::ONE;
+    let a: Scalar = Scalar::from(18446744073709551615);
     let b: Scalar = Scalar::from(0);
-    let d: Scalar = random_scalar();
-    // let d: Scalar = Scalar::from(44203);
+    // let d: Scalar = random_scalar();
+    let d: Scalar = Scalar::from(4398046511119);
 
     // generate one range proof to get its nonces & commitments
     let (y, dpt, p, apt, bpt, w, l, ar, br) = create_range_proof(a, b, d);
