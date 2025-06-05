@@ -133,7 +133,7 @@ Proving that a value lies within a specific interval while preserving its confid
 
 Although some schemes offer constant-size proofs, they often rely on trusted setups or result in verbose proofs \cite{christetal2024}. More recent advancements like Bulletproofs \cite{bunz2018bulletproofs} have reduced proof sizes to sublinear scales, all while being trustless; however, their proof size still depends on the interval's range, which can be a limiting factor in applications with variable interval lengths. zkInterval addresses these challenges by delivering constant-size, scalable range proofs that maintain confidentiality without compromising efficiency. This work fills a critical gap in current cryptographic methods and paves the way for further advancements in range-proof technologies.
 
-The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Weil pairings, Pedersen commitments, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
+The remainder of this paper is as follows. Section 2 presents the derivation of the zkInterval protocol, detailing its mathematical foundation and the integration of Pedersen commitments, Weil pairings, and Schnorr $\Sigma$-protocols. Section 3 rigorously examines the protocol's security properties, establishing its zero-knowledge guarantees and demonstrating that it forms a complete proof system. Finally, Section 4 discusses the practical implementation of zkInterval on the Cardano blockchain, highlighting its performance benefits and suitability for privacy-focused and scalable cryptographic applications.
 
 \section{Derivation}
 
@@ -196,14 +196,17 @@ Recall that \( \psi = r_{a} + r_{b} + r_{w} \) and \( \lambda = r_{y} + 2r_{d} \
 \begin{equation}
 g^{\lambda + \psi} h^{y + 2 d}  = g^{\psi + \lambda}  h^{a + b + w}.
 \end{equation}
-The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cancel out.
+The definitions of \( \psi \) and \( \lambda \) allow the \( g \) terms to cancel out, resulting in an equation involving only the h terms:
 \begin{equation}
-h^{y + 2 d} = h^{a + b + w}
+h^{y + 2 d} = h^{a + b + w}.
 \end{equation}
-We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
+Rewrite in standard form and simplify. We know from equation \ref{half_eq} that $a + b + w - y - 2d = 0$ thus
 \begin{equation}
 h^{a + b + w - y - 2 d} = h^{0} = 1
 \end{equation}
+\begin{center}
+\( \square \)
+\end{center} 
 \end{namedproof}
 
 The prover must possess comprehensive knowledge of all blinding factors and their aggregate sums and is responsible for constructing the proof with the necessary mathematical rigor. Their key responsibility is to ensure that the commitment form reaches a state of equilibrium and that each component of equation \ref{full_eq} is encapsulated within a commitment.
@@ -218,7 +221,7 @@ e(Q, P) \rightarrow e(Q, C),
 where \( Q \) is a fixed \( \mathbb{G}_{2} \) point and \(C\) is a Pedersen commitment as a \( \mathbb{G}_{1} \) point on pairing friendly curve. The Galois invariant property is:
 
 \begin{equation}
-e(Q, P)^v = e(v Q, P) = e(Q, v P) \rightarrow e(Q, C(v, r_{v})),
+e(Q, P)^v = e(v Q, P) = e(Q, v P) \rightarrow e(Q, C(v, r_{v})) = e(Q, g^{r_{v}} h^{v}),
 \end{equation}
 where $r_{v}$ is a random blinding factor for the scalar $v$. The identity property is:
 
@@ -302,6 +305,9 @@ Since
 g^{z} = g^{\alpha + c \cdot r_{a}} = g^{\alpha} \cdot g^{c \cdot r_{a}} = g^{\alpha} \cdot (g^{r_{a}})^{c} = g^{\alpha} \cdot C_{r_a}^{c},
 \end{equation}
 the proof holds.
+\begin{center}
+\( \square \)
+\end{center} 
 \end{namedproof}
 
 The prover must provide \( z \) in hexadecimal form and \( g^{\alpha} \) for the \( A \) and \( B \) terms. Together with the pairing equation and the two Schnorr $\Sigma$-protocols, this constitutes a complete zero-knowledge proof system for demonstrating that the value \( d \) lies between \( a \) and \( b \). The final proof is the hexadecimal string:

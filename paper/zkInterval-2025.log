@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  26 MAY 2025 21:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  5 JUN 2025 16:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1407,7 +1407,7 @@ texlive/texmf-dist/tex/latex/doclicense/images/doclicense-CC-by-88x31.pdf>] [2{
 /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/d
 vips/lm/lm-mathsy.enc}] [3]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-61.
+64.
 iacrcc:opened as ts1lmr.fd
 
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
@@ -1429,11 +1429,11 @@ Package rerunfilecheck Info: File `zkInterval-2025.out' has not changed.
 (rerunfilecheck)             Checksum: CA9E9D4A01D012097C21F2B128179FBE;563.
  ) 
 Here is how much of TeX's memory you used:
- 27685 strings out of 474222
- 506605 string characters out of 5748733
+ 27681 strings out of 474222
+ 506565 string characters out of 5748733
  1941975 words of memory out of 5000000
  49125 multiletter control sequences out of 15000+600000
- 641805 words of font info for 193 fonts, out of 8000000 for 9000
+ 641639 words of font info for 191 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,14n,121p,1404b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
@@ -1447,11 +1447,12 @@ onts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb>
 1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on zkInterval-2025.pdf (9 pages, 363412 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on zkInterval-2025.pdf (9 pages, 372128 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
+ 281 PDF objects out of 1000 (max. 8388607)
+ 224 compressed objects within 3 object streams
  61 named destinations out of 1000 (max. 500000)
  50242 words of extra memory for PDF output out of 51595 (max. 10000000)
 
