@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  5 JUN 2025 16:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.2.18)  7 JUN 2025 17:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1397,7 +1397,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 <doclicense-CC-by-88x31.pdf, id=40, 90.3375pt x 31.61812pt>
 File: doclicense-CC-by-88x31.pdf Graphic file (type pdf)
 <use doclicense-CC-by-88x31.pdf>
-Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 137.
+Package pdftex.def Info: doclicense-CC-by-88x31.pdf  used on input line 139.
 (pdftex.def)             Requested size: 36.99963pt x 12.95pt.
  [1
 
@@ -1407,18 +1407,18 @@ texlive/texmf-dist/tex/latex/doclicense/images/doclicense-CC-by-88x31.pdf>] [2{
 /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/d
 vips/lm/lm-mathsy.enc}] [3]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-64.
+66.
 iacrcc:opened as ts1lmr.fd
 
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 iacrcc:closed as ts1lmr.fd
- [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}] [5{/usr/share/texmf/fonts/
-enc/dvips/lm/lm-mathex.enc}] [6]
-[7]
+ [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}] [5] [6{/usr/share/texmf/fo
+nts/enc/dvips/lm/lm-mathex.enc}]
+[7] [8]
 iacrcc:opened as zkInterval-2025.bbl
- (./zkInterval-2025.bbl [8])
+ (./zkInterval-2025.bbl)
 iacrcc:closed as zkInterval-2025.bbl
  [9] (./zkInterval-2025.aux)
  ***********
@@ -1430,12 +1430,12 @@ Package rerunfilecheck Info: File `zkInterval-2025.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  27681 strings out of 474222
- 506565 string characters out of 5748733
- 1941975 words of memory out of 5000000
- 49125 multiletter control sequences out of 15000+600000
- 641639 words of font info for 191 fonts, out of 8000000 for 9000
+ 506541 string characters out of 5748733
+ 1940975 words of memory out of 5000000
+ 49123 multiletter control sequences out of 15000+600000
+ 641645 words of font info for 191 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 125i,14n,121p,1404b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 125i,14n,121p,1026b,831s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/p
@@ -1449,10 +1449,10 @@ sr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on zkInterval-2025.pdf (9 pages, 372128 bytes).
+Output written on zkInterval-2025.pdf (9 pages, 372748 bytes).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 224 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
+ 283 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
  50242 words of extra memory for PDF output out of 51595 (max. 10000000)
 
